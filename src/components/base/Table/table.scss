@@ -1,0 +1,50 @@
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.table {
+    margin-bottom: 0.5rem;
+
+    tbody {
+        border-bottom: 2px solid $color-brand-5 !important;
+    }
+
+    &__header {
+        border-bottom: 2px solid $color-brand-5 !important;
+        border-top: none !important;
+        font-size: 12px;
+        font-weight: $font-medium;
+        text-transform: uppercase;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        line-height: 12px;
+    }
+
+    &__data {
+        border-top: 1px solid $color-divider !important;
+        vertical-align: middle !important;
+        min-height: 52px !important;
+    }
+
+    &__sort-icon {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    &-striped tbody tr:nth-of-type(odd) {
+        background-color: #F9FBFF;
+    }
+
+    &-hover tbody tr:hover {
+        background-color: darken(#F9FBFF, 1%);
+    }
+
+    .--success {
+        background-color: rgba(#2EC29E, 0.1);
+    }
+
+    .--error {
+        background-color: rgba(#F34247, 0.1);
+    }
+}

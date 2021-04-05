@@ -4,6 +4,7 @@ const Home = React.lazy(() => import('../containers/Home/HomeContainer'));
 const Login = React.lazy(() => import('../containers/Login/LoginContainer'));
 const NotFound = React.lazy(() => import('../containers/NotFound/NotFoundContainer'));
 const Dashboard = React.lazy(() => import('../containers/Dashboard/DashboardContainer'));
+const Management = React.lazy(() => import('../containers/Management/ManagementContainer'));
 // ROUTE IMPORT CODE GENERATOR INDICATOR DO NOT DELETE
 
 const routes = [{
@@ -19,6 +20,10 @@ const routes = [{
     path: '/dashboard',
     name: Dashboard,
     component: Dashboard
+}, {
+    path: '/management',
+    name: Management,
+    component: Management
 }, // ROUTE ENTRY CODE GENERATOR INDICATOR DO NOT DELETE
 {
     path: '*',

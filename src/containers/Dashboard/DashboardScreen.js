@@ -1,33 +1,74 @@
 // @flow
 import React from 'react';
-import CollapsibleSidebar from '../../components/base/CollapsibleSidebar/CollapsibleSidebarContainer';
-import Navbar from '../../components/base/Navbar/Navbar';
+import { Row, Col } from 'react-bootstrap';
+import { FaCheckCircle } from 'react-icons/fa';
 import Typography from '../../components/base/Typography/Typography';
-import type { Menu } from '../../types';
+import Table from '../../components/base/Table/Table';
+import Button from '../../components/base/Button/Button';
+import ProgressStep from '../../components/base/ProgressStep/ProgressStep';
+import withLoading from '../../components/modules/withLoading/withLoading';
 import './dashboard.scss';
 
 type Props = {
-    dashboardMenu: Array<Menu>
+    tableHeader: Array<any>,
+    assignments: Array<any>,
+    filters: Array<any>,
+    handleSelectedFilter: (type: string) => void,
+    selectedFilter: string,
+    handleSearch: (e: Object) => void,
+    data: Object
 }
 
-export default function DashboardScreen({ dashboardMenu }: Props): React$Element<any> {
+function DashboardScreen({ tableHeader, assignments, filters, handleSelectedFilter, selectedFilter, handleSearch, data }: Props): React$Element<any> {
     return (
-        <div className='dashboard'>
-            <Navbar />
+        <div className='dashboard__wrapper'>
+            <div className='mx-md-5 px-md-5 mx-sm-3 px-sm-0'>
+                <ProgressStep />
+            </div>
 
-            <div className='dashboard__wrapper'>
-                <CollapsibleSidebar
-                    menu={dashboardMenu} />
-
-                <div className='p-3'>
-                    <Typography variant='size-22'>
-                        Dashboard
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tristique posuere ligula ac facilisis. Ut gravida est nec tincidunt imperdiet. Donec sed venenatis libero. Nam id accumsan lectus. Integer ut lacus dolor. Aliquam consequat risus porta, egestas urna non, posuere nisl. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam laoreet, ante non lacinia sagittis, nibh felis fringilla libero, sit amet fermentum sem nunc non magna. Proin commodo faucibus velit. Praesent volutpat orci in elit blandit, ut molestie nulla venenatis. Sed pharetra aliquam lobortis.
-                    </Typography>
+            <div className='dashboard'>
+                <div className='dashboard__header'>
+                    <Typography variant='size-20' weight='semi-bold'>PE ASSIGNMENTS DASHBOARD</Typography>
                 </div>
+
+                <Row className='dashboard__filter'>
+                    {filters.map(filter =>
+                        <Col key={filter.label} xs={4} lg={2}>
+                            <Button
+                                className={`dashboard__filter-item -${filter.label}`}
+                                variant={filter.buttonVariant}
+                                onClick={() => handleSelectedFilter(filter.label)}>
+                                <div className='flex-spaced'>
+                                    <Typography variant={filter.label === 'all' ? 'size-34' : 'size-14'} color='color-3'>{filter.label.toUpperCase()}</Typography>
+                                    {selectedFilter === filter.label && (
+                                        <FaCheckCircle color='#EFEFEF' className='dashboard__filter-item__icon'/>
+                                    )}
+                                </div>
+                                {filter.label !== 'all' && (
+                                    <Typography variant='size-24' color='color-3' weight='semi-bold'>
+                                        {filter.total}
+                                    </Typography>
+                                )}
+                            </Button>
+                        </Col>
+                    )}
+                </Row>
+
+                <div className='dashboard__search'>
+                    <Typography weight='semi-bold' className='mr-2'>Search:</Typography>
+                    <input onChange={handleSearch}/>
+                </div>
+
+                <Table
+                    data={data}
+                    headers={tableHeader}
+                    list={assignments}
+                    isStriped={true}/>
             </div>
         </div>
     );
 }
+
+const Dashboard: any = withLoading(DashboardScreen);
+
+export default Dashboard;

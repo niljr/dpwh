@@ -1,0 +1,12 @@
+.button {
+    &.btn-outline-primary,
+    &.btn-outline-secondary,
+    &.btn-outline-success,
+    &.btn-outline-warning,
+    &.btn-outline-info,
+    &.btn-outline-danger,
+    &.btn-outline-light,
+    &.btn-outline-dark {
+        background-color: #fff;
+    }
+}

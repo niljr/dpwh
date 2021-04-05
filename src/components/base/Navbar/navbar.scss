@@ -6,8 +6,13 @@
     height: $height-navmenu;
     box-shadow: 0 2px $color-shadow;
 
-    &__right {
-        display: flex;
-        align-items: center;
+    &__logo {
+        height: 50px;
+        width: 50px;
+    }
+
+    &__toggle {
+        padding: 15px;
+        cursor: pointer;
     }
 }

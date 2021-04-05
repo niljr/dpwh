@@ -4,6 +4,7 @@ import './login.scss';
 import Form from 'react-bootstrap/Form';
 import Button from '../../components/base/Button/Button';
 import Typography from '../../components/base/Typography/Typography';
+import LOGO from '../../assets/DPWH-logo.png';
 
 type Props = {
     onSubmit: Function,
@@ -13,12 +14,19 @@ type Props = {
 export default function Login({ onSubmit, onChange }:Props): React$Element<any> {
     return (
         <div className='login'>
-            <div className='d-flex justify-content-center align-items-center w-100 h-100'>
-                <div className='form-container'>
+            <div className='login__wrapper'>
+                <div className='login__image' />
+            </div>
+
+            <div className='login__wrapper'>
+
+                <div className='login__form'>
+                    <img src={LOGO} alt='logo' />
+
                     <Typography
                         variant='size-26' color='color-2' weight='bold'
-                        className='text-center'>
-                        Log in
+                        className='text-center mt-3 mb-5'>
+                        DPWH Engineering District
                     </Typography>
                     <Form onSubmit={onSubmit}>
                         <input className='form-control mt-4' placeholder='Email' type='email'

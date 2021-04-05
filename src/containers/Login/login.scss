@@ -3,16 +3,27 @@
 
 .login {
     height: 100%;
+    display: flex;
 
-    .form-container {
-        border-top-left-radius: $border-radius-large;
-        border-top-right-radius: $border-radius-large;
-        border-bottom-left-radius: $border-radius-large;
-        border-bottom-right-radius: $border-radius-large;
-        width: 350px;
-        
-        @include screen-xs {
-            width: 75%;
-        }
+    &__wrapper {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__image {
+        background-image: url('../../assets/login-placeholder.jpeg');
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__form {
+        text-align: center;
+        width: 50%;
+        max-width: 350px;
     }
 }

@@ -30,20 +30,24 @@ $border-radius-large: 10px;
 $color-background: #fff;
 
 // color: brand
-$color-brand-1: #37A187;
+$color-brand-1: #0094fe;
 $color-brand-2: #464646;
 $color-brand-3: #EFEFEF;
+$color-brand-4: #d1d1d1;
+$color-brand-5: #919191;
+
 
 // color: font
 $color-font-base: $color-brand-2;
 
 $color-primary: $color-brand-1;
-// $color-secondary: ;
-// $color-success: ;
-// $color-warning: ;
-// $color-info: ;
-// $color-danger: ;
-// $color-light: ;
+$color-secondary: #786c90;
+$color-success: #65ad7b;
+$color-warning: #e7b167;
+$color-info: #60a9ca;
+$color-danger: #d5746d;
+$color-light: $color-brand-5;
+// $color-dark: #786c90;
 
 // colors: links
 $color-link: $color-brand-1;

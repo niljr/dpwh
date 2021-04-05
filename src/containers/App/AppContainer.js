@@ -6,20 +6,21 @@ import routes from '../../config/routes';
 import AppLoadingContainer from '../AppLoading/AppLoadingContainer';
 import AppModal from '../../components/base/Modal/Modal';
 import FlashNotification from '../../components/modules/FlashNotification/FlashNotification';
-import WrapperBackground from '../../components/base/WrapperBackground/WrapperBackground';
+import Navbar from '../../components/base/Navbar/Navbar';
 import { clearModalContent } from '../../redux/modules/modalEvent';
 
 const loading = () => (
-    <WrapperBackground>
+    <div>
         <Spinner animation='border' role='status'>
             <span className='sr-only'>Loading...</span>
         </Spinner>
-    </WrapperBackground>
+    </div>
 );
 
 function App() {
     const dispatch = useDispatch();
     const { modalContent, onToggle, ...modalEvent } = useSelector(({ modalEvent }) => modalEvent);
+    const { isAuthed } = useSelector(({ authentication }) => authentication);
 
     const handleCloseModal = () => {
         dispatch(clearModalContent());
@@ -35,12 +36,17 @@ function App() {
     return (
         <AppLoadingContainer>
             <div id='outer-container'>
+                {isAuthed && (
+                    <Navbar />
+                )}
                 <React.Suspense fallback={loading()}>
-                    <Switch>
-                        {routes.map((route, i) => (
-                            <RouteWithSubRoutes key={i} {...route} />
-                        ))}
-                    </Switch>
+                    <div id='page-wrap'>
+                        <Switch>
+                            {routes.map((route, i) => (
+                                <RouteWithSubRoutes key={i} {...route} />
+                            ))}
+                        </Switch>
+                    </div>
                 </React.Suspense>
             </div>
 

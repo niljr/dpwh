@@ -10,6 +10,11 @@ body {
     height: 100%;
     width: 100%;
     overflow: auto;
+
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
 }
 
 #root {
@@ -29,7 +34,7 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 1.5rem 1.75rem;
-    height: 100%;
+    height: calc(100% - 60px);
 }
 
 .safari-fix #page-wrap {
@@ -74,6 +79,11 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.flex-spaced {
+    display: flex;
+    justify-content: space-between;
 }
 
 .modal-content {

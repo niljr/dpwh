@@ -62,26 +62,6 @@ export default function ${ComponentName}Container({ className = '' }: Props): Re
 }
 `;
 
-    const storyBody = `import React from 'react';
-import ${ComponentName} from './${ComponentName}${smartComponent ? 'Container' : ''}';
-
-const config = {
-    title: 'Components/${ComponentName}',
-    component: ${ComponentName},
-    argTypes: {
-        // TODO add argTypes
-    }
-};
-
-export default config;
-
-const Template = (args) => <${ComponentName} {...args} />;
-
-export const Sample = Template.bind({});
-Sample.args = {
-    // TODO add args
-};
-`
     const styleBody = `
 @import '../../../styles/utils/_variables';
 @import '../../../styles/utils/_mixins';
@@ -101,11 +81,6 @@ Sample.args = {
             containerBody,
         );
     }
-
-    makey.createFile(
-        `./src/components/${compType}/${ComponentName}/${ComponentName}.stories.js`,
-        storyBody,
-    );
 
     makey.createFile(
         `./src/components/${compType}/${ComponentName}/${styleName}.scss`,

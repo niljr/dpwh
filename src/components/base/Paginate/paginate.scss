@@ -1,0 +1,24 @@
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.paginate {
+    .btn-sm {
+        padding: 6px 10px;
+    }
+
+    .btn-link {
+        color: $color-brand-2;
+    }
+
+    .btn-group-sm {
+        .btn {
+            padding: 6px 13px !important;
+        }
+    }
+
+    .btn-group {
+        .btn:not(:first-of-type) {
+            margin-left: 0 !important;
+        }
+    }
+}

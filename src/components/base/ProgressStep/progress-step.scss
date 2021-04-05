@@ -1,0 +1,32 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.progress-step {
+    position: relative;
+    margin: 10px 0;
+
+    hr {
+        // margin-bottom: -2rem;
+        position: absolute;
+        width: 100%;
+        z-index: -2;
+        top: 14px;
+    }
+
+    &__button {
+        border-radius: 50%;
+        height: 55px;
+        width: 55px;
+
+        &:hover {
+            svg {
+                color: rgb(255, 255, 255) !important;
+            }
+        }
+
+        &:first-of-type {
+            margin-right: 100px;
+        }
+    }
+}
