@@ -2,13 +2,12 @@
 @import "../../../styles/utils/_mixins";
 
 .navbar {
-    padding: 0 $spacing;
+    padding: 10px 10px 0 !important;
     height: $height-navmenu;
-    box-shadow: 0 2px $color-shadow;
+    background-color: $color-background;
 
-    &__logo {
-        height: 50px;
-        width: 50px;
+    &.colored {
+        background-color: $color-brand-7;
     }
 
     &__toggle {

@@ -8,20 +8,20 @@ const Management = React.lazy(() => import('../containers/Management/ManagementC
 // ROUTE IMPORT CODE GENERATOR INDICATOR DO NOT DELETE
 
 const routes = [{
+    path: '/login',
+    name: 'Login',
+    component: Login
+}, {
     path: '/',
     exact: true,
     name: 'Home',
     component: Home
 }, {
-    path: '/login',
-    name: 'Login',
-    component: Login
-}, {
     path: '/dashboard',
     name: Dashboard,
     component: Dashboard
 }, {
-    path: '/management',
+    path: '/contract-management',
     name: Management,
     component: Management
 }, // ROUTE ENTRY CODE GENERATOR INDICATOR DO NOT DELETE

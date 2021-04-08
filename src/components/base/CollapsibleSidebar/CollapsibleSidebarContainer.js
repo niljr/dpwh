@@ -12,7 +12,7 @@ type Props = {
     menu?: Array<Menu>
 }
 
-export default function CollapsibleSidebarContainer(props: Props): React$Element<any> {
+export default function CollapsibleSidebarContainer({ children, ...props }: Props): React$Element<any> {
     const pathName = usePathname();
 
     const [isOpen, setToggleOpen] = React.useState(true);
@@ -29,6 +29,8 @@ export default function CollapsibleSidebarContainer(props: Props): React$Element
             {...props}
             pathName={pathName}
             handleToggleSidebar={handleToggleSidebar}
-            isOpen={isOpen} />
+            isOpen={isOpen}>
+            {children}
+        </CollapsibleSidebar>
     );
 }

@@ -1,0 +1,19 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.brand {
+    background-color: $color-background;
+    padding-left: 10px;
+    width: $sidebar-width;
+    text-align: left;
+    display: flex !important;
+    align-items: center;
+
+    &__logo {
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
+    }
+
+}

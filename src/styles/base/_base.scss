@@ -23,8 +23,10 @@ body {
 
 #outer-container {
     height: 100%;
-    // background: rgba(203, 203, 210, 0.15);
+    background: rgba(203, 203, 210, 0.15);
     overflow: hidden;
+    display: flex;
+
 }
 
 #page-wrap {
@@ -33,7 +35,6 @@ body {
     contain: layout;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding: 1.5rem 1.75rem;
     height: calc(100% - 60px);
 }
 

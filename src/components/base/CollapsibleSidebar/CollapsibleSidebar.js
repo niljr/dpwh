@@ -2,10 +2,11 @@
 import React from 'react';
 import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 import { Accordion, Card } from 'react-bootstrap';
-import { IoMdMenu, IoMdClose } from 'react-icons/io';
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import type { Menu } from '../../../types';
 import './collapsible-sidebar.scss';
+import Brand from '../Brand/Brand';
 
 type Props = {
     className?: string,
@@ -19,13 +20,14 @@ type Props = {
 export default function CollapsibleSidebar({
     className = '', children, handleToggleSidebar, isOpen, pathName, menu = []
 }: Props): React$Element<any> {
-    const Icon = !isOpen ? IoMdMenu : IoMdClose;
+    const Icon = isOpen ? FaAngleDoubleLeft : FaAngleDoubleRight;
 
     return (
         <div className={`collapsible-sidebar${!isOpen ? ' is-open' : ''}`} >
+            <Brand />
             <div className='collapsible-sidebar__control'>
                 <div onClick={handleToggleSidebar} className='collapsible-sidebar__control-button'>
-                    <Icon color='#fff' size={30} className='m-3'/>
+                    <Icon color='#fff' size={20} className='m-3'/>
                 </div>
             </div>
 

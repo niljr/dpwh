@@ -1,78 +1,77 @@
 // @flow
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoIosNotifications, IoMdArrowDropdown } from 'react-icons/io';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { useLocation, useHistory } from 'react-router-dom';
 import Typography from '../Typography/Typography';
-import LOGO from '../../../assets/DPWH-logo.png';
+import Brand from '../Brand/Brand';
 import './navbar.scss';
 
 type Props = {
     className?: string
 }
 
-// const appName = process.env.REACT_APP_SITE_TITLE;
-
-// NOTE: this is just a sample nav
-// please update when needed
+type Menu = {label: string | null, route: string | null, isDivider: null | boolean};
 
 export default function AppNavbar({ className = '' }: Props): React$Element<any> {
+    const menu: Array<Menu> = [{
+        label: 'Home',
+        route: '/dashboard',
+        isDivider: false
+    }, {
+        label: 'Contract Management',
+        route: '/contract-management',
+        isDivider: false
+    }, {
+        isDivider: true,
+        label: null,
+        route: null
+    }, {
+        label: 'Sign Out',
+        route: '/login',
+        isDivider: false
+    }];
+
+    const history = useHistory();
+    const { pathname } = useLocation();
+
+    const isDashboard = pathname === '/dashboard';
+
+    const getCurrentMenu = ():Menu | void => menu.find(m => m.route === pathname);
+
+    const [currentMenu, setCurrentMenu] = useState<Menu | void>(getCurrentMenu());
+
+    useEffect(() => {
+        setCurrentMenu(getCurrentMenu());
+    }, [pathname]);
+
+    const handleOnClick = (route) => {
+        history.push(route);
+    };
+
     return (
-    // <Navbar className={`flex-spaced ${className}`} >
-    //     <div className='flex-centered'>
-    //         <img src={LOGO} alt='logo' className='navbar__logo'/>
-
-    //         <div className='ml-2'>
-    //             <Typography variant='size-12'>Welcome</Typography>
-    //             <Typography variant='size-18' weight='bold'>Dingdong, Dantes</Typography>
-    //             <Typography variant='size-12'>Iloilo 3rd district Engineering Office</Typography>
-    //         </div>
-    //     </div>
-
-    //     <Nav>
-    //         <div className='navbar__icon'>
-    //             <IoIosNotifications size={20} className='m-3' />
-    //         </div>
-    //         <NavDropdown title='Home'>
-    //             <NavDropdown.Item href='#action/3.1'>Action</NavDropdown.Item>
-    //             <NavDropdown.Item href='#action/3.2'>Another action</NavDropdown.Item>
-    //             <NavDropdown.Item href='#action/3.3'>Something</NavDropdown.Item>
-    //             <NavDropdown.Divider />
-    //             <NavDropdown.Item href='#action/3.4'>Separated link</NavDropdown.Item>
-    //         </NavDropdown>
-    //     </Nav>
-    // </Navbar>
-
-        <Navbar expand='lg'>
-            <Navbar.Brand href='#home' className='flex-centered'>
-                <img src={LOGO} alt='logo' className='navbar__logo'/>
-
-                <div className='ml-2'>
-                    <Typography variant='size-12'>Welcome</Typography>
-                    <Typography variant='size-18' weight='bold'>Dingdong, Dantes</Typography>
-                    <Typography variant='size-12'>Iloilo 3rd district Engineering Office</Typography>
+        <Navbar expand='lg' className={isDashboard ? '' : 'colored'}>
+            {isDashboard && <Brand />}
+            <Nav className='ml-auto'>
+                <div className='navbar__toggle mr-2'>
+                    <IoIosNotifications size={20} color={isDashboard ? '#464646' : '#fff'}/>
                 </div>
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls='basic-navbar-nav' />
-            <Navbar.Collapse id='basic-navbar-nav'>
-                <Nav className='ml-auto'>
-                    <div className='navbar__toggle mr-2'>
-                        <IoIosNotifications size={20}/>
-                    </div>
-                    <Dropdown>
-                        <Dropdown.Toggle as={CustomToggle} id='dropdown-custom-components'>
-                            <Typography>
-                                Home <IoMdArrowDropdown size={20}/>
-                            </Typography>
-                        </Dropdown.Toggle>
+                <Dropdown>
+                    <Dropdown.Toggle as={CustomToggle} id='dropdown-custom-components'>
+                        <Typography color={isDashboard ? 'color-2' : 'color-3'}>
+                            {currentMenu?.label} <IoMdArrowDropdown size={20}/>
+                        </Typography>
+                    </Dropdown.Toggle>
 
-                        <Dropdown.Menu align='right'>
-                            <Dropdown.Item eventKey='1'>Red</Dropdown.Item>
-                            <Dropdown.Item eventKey='2'>Blue</Dropdown.Item>
-                            <Dropdown.Item eventKey='1'>Red-Orange</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Nav>
-            </Navbar.Collapse>
+                    <Dropdown.Menu align='right'>
+                        {menu.filter(m => m.label !== currentMenu?.label).map(item =>
+                            item.isDivider
+                                ? <Dropdown.Divider />
+                                : <Dropdown.Item onClick={() => handleOnClick(item.route)}>{item.label}</Dropdown.Item>
+                        )}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </Nav>
         </Navbar>
     );
 }

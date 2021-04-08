@@ -3,21 +3,28 @@
 @import '../../../styles/utils/_mixins';
 
 .collapsible-sidebar {
-    background-color: $color-brand-2;
+    background-color: $color-brand-6;
     height: 100%;
     width: $sidebar-width;
     transition: all 0.3s;
     color: $color-brand-3;
     flex: 0 0 $sidebar-width;
+    position: relative;
 
     &.is-open {
-        width: 55px;
+        width: 70px;
         flex: 0 0 55px;
     }
 
     &__control {
         display: flex;
         justify-content: flex-end;
+        background-color: $color-brand-6;
+        border-radius: $border-radius-large;
+        position: absolute;
+        bottom: 30px;
+        right: -20px;
+        z-index: 1;
 
         &-button {
             cursor: pointer;
