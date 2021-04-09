@@ -17,7 +17,7 @@ export default function Typography({
     component,
     className = '',
     color = 'color-2',
-    variant = 'size-16',
+    variant = 'size-14',
     weight = 'regular',
     children,
     ...props

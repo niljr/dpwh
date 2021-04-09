@@ -11,7 +11,7 @@ type Props = {
 
 export default function Brand({ className = '' }: Props): React$Element<any> {
     return (
-        <Navbar.Brand href='/dashboard' className='brand'>
+        <Navbar.Brand href='/dashboard' className={`brand ${className}`}>
             <img src={LOGO} alt='logo' className='brand__logo'/>
 
             <div>

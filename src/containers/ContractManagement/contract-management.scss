@@ -2,22 +2,14 @@
 @import '../../styles/utils/_variables';
 @import '../../styles/utils/_mixins';
 
-.management {
+.contract-management {
     height: 100%;
     background-color: $color-brand-7;
     overflow: hidden;
 
-    &__wrapper {
-        display: flex;
-        height: 100%;
-    }
-
     &__content {
         width: 100%;
-
-        &-main {
-            background-color: $color-background;
-            height: 100%;
-        }
+        height: 100%;
+        background-color: $color-background;
     }
 }

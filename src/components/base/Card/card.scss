@@ -1,0 +1,12 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.card {
+    border-color: $color-brand-7;
+
+    &-header {
+        background-color: $color-brand-7;
+        padding: 5px 10px;
+    }
+}

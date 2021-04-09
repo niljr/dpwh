@@ -16,6 +16,10 @@
         flex: 0 0 55px;
     }
 
+    &__brand {
+        border-bottom: 2px solid $color-brand-7;
+    }
+
     &__control {
         display: flex;
         justify-content: flex-end;

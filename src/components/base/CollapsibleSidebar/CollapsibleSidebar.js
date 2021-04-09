@@ -24,7 +24,7 @@ export default function CollapsibleSidebar({
 
     return (
         <div className={`collapsible-sidebar${!isOpen ? ' is-open' : ''}`} >
-            <Brand />
+            <Brand className='collapsible-sidebar__brand'/>
             <div className='collapsible-sidebar__control'>
                 <div onClick={handleToggleSidebar} className='collapsible-sidebar__control-button'>
                     <Icon color='#fff' size={20} className='m-3'/>
