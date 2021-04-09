@@ -1,7 +1,15 @@
 // @flow
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ManagementScreen from './ContractManagementScreen';
 
 export default function ManagementContainer(): React$Element<any> {
-    return <ManagementScreen />;
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+    }, []);
+
+    return <ManagementScreen isLoading={isLoading}/>;
 }

@@ -18,9 +18,9 @@ export default function Card({ className = '', header, children, footer }: Props
                     {header}
                 </BootstrapCard.Header>
             )}
-            <BootstrapCard.Body>
-                {children}
-            </BootstrapCard.Body>
+
+            {children}
+
             {footer && (
                 <BootstrapCard.Footer>
                     {footer}

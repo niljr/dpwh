@@ -3,10 +3,10 @@
 @import '../../../styles/utils/_mixins';
 
 .card {
-    border-color: $color-brand-7;
+    border-color: $color-brand-7 !important;
 
     &-header {
-        background-color: $color-brand-7;
-        padding: 5px 10px;
+        background-color: $color-brand-7 !important;
+        padding: 5px 10px !important;
     }
 }

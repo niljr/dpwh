@@ -1,10 +1,5 @@
 @import '../utils/_variables';
 
-// md bootstrap
-// @import "@fortawesome/fontawesome-free/css/all.min.css";
-// @import "bootstrap-css-only/css/bootstrap.min.css";
-// @import "mdbreact/dist/css/mdb.css";
-
 $theme-colors: (
     'primary': $color-brand-1,
     'success': $color-success,
@@ -12,7 +7,8 @@ $theme-colors: (
     'warning': $color-warning,
     'info': $color-info,
     'secondary': $color-secondary,
-    'light': $color-brand-4
+    'light': $color-brand-4,
+    'dark': $color-dark
 );
 
 @import '~bootstrap/scss/bootstrap';

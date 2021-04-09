@@ -66,8 +66,8 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
                     <Dropdown.Menu align='right'>
                         {menu.filter(m => m.label !== currentMenu?.label).map(item =>
                             item.isDivider
-                                ? <Dropdown.Divider />
-                                : <Dropdown.Item onClick={() => handleOnClick(item.route)}>{item.label}</Dropdown.Item>
+                                ? <Dropdown.Divider key={item.route}/>
+                                : <Dropdown.Item onClick={() => handleOnClick(item.route)} key={item.route}>{item.label}</Dropdown.Item>
                         )}
                     </Dropdown.Menu>
                 </Dropdown>

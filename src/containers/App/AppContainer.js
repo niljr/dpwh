@@ -6,6 +6,8 @@ import routes from '../../config/routes';
 import AppLoadingContainer from '../AppLoading/AppLoadingContainer';
 import AppModal from '../../components/base/Modal/Modal';
 import FlashNotification from '../../components/modules/FlashNotification/FlashNotification';
+import SearchContract from '../../components/modules/SearchContract/SearchContract';
+import ContractInformation from '../../components/modules/ContractInformation/ContractInformation';
 import CollapsibleSidebar from '../../components/base/CollapsibleSidebar/CollapsibleSidebarContainer';
 import Navbar from '../../components/base/Navbar/Navbar';
 import { clearModalContent } from '../../redux/modules/modalEvent';
@@ -38,7 +40,12 @@ function App() {
     return (
         <AppLoadingContainer>
             <div id='outer-container'>
-                {pathname.includes('management') && <CollapsibleSidebar menu={[]} />}
+                {pathname.includes('management') && (
+                    <CollapsibleSidebar className='p-2'>
+                        <SearchContract />
+                        <ContractInformation />
+                    </CollapsibleSidebar>
+                )}
 
                 <div className='w-100'>
                     {isAuthed && (
