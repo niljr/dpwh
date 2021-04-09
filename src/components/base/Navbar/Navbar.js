@@ -5,6 +5,7 @@ import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
 import Typography from '../Typography/Typography';
 import Brand from '../Brand/Brand';
+import CustomToggle from '../CustomToggle';
 import './navbar.scss';
 
 type Props = {
@@ -37,7 +38,7 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
 
     const isDashboard = pathname === '/dashboard';
 
-    const getCurrentMenu = ():Menu | void => menu.find(m => m.route === pathname);
+    const getCurrentMenu = ():Menu | void => menu.find(m => pathname.includes(m.route));
 
     const [currentMenu, setCurrentMenu] = useState<Menu | void>(getCurrentMenu());
 
@@ -57,7 +58,7 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
                     <IoIosNotifications size={20} color={isDashboard ? '#464646' : '#fff'}/>
                 </div>
                 <Dropdown>
-                    <Dropdown.Toggle as={CustomToggle} id='dropdown-custom-components'>
+                    <Dropdown.Toggle as={CustomToggle} id='dropdown-custom-components' className='navbar__toggle'>
                         <Typography color={isDashboard ? 'color-2' : 'color-3'}>
                             {currentMenu?.label} <IoMdArrowDropdown size={20}/>
                         </Typography>
@@ -75,9 +76,3 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
         </Navbar>
     );
 }
-
-const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <div ref={ref} onClick={onClick} className='navbar__toggle'>
-        {children}
-    </div>
-));
