@@ -8,17 +8,19 @@ import './potential-vo.scss';
 
 type Props = {
     variationOrder: Array<any>,
-    changeList: Array<any>
+    changeList: Array<any>,
+    handleToggleForm: (actionType: 'edit' | 'add', data: null | Object) => void
 }
 
-function PotentialVOScreen({ variationOrder, changeList }: Props): React$Element<any> {
+function PotentialVOScreen({ variationOrder, changeList, handleToggleForm }: Props): React$Element<any> {
     return (
         <div className='potential-vo'>
             <SectionWithAction
                 label='Change Needed List'
                 buttonLabel='ADD'
                 buttonIcon={FaPlus}
-                className='mt-2'/>
+                className='mt-2'
+                onButtonClick={() => handleToggleForm('add')}/>
 
             <div className='contract-management__content-details mx-3'>
                 <TableDetails
