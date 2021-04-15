@@ -1,15 +1,15 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router';
 import ManagementScreen from './ContractManagementScreen';
 
-export default function ManagementContainer(): React$Element<any> {
-    const [isLoading, setIsLoading] = useState(true);
+type Props = {
+    routes: Array<any>
+}
+export default function ManagementContainer({ routes }: Props): React$Element<any> {
+    const { pathname } = useLocation();
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 500);
-    }, []);
-
-    return <ManagementScreen isLoading={isLoading}/>;
+    return <ManagementScreen
+        routes={routes}
+        isParentRoute={pathname === '/contract-management'}/>;
 }

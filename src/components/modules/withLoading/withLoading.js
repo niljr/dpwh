@@ -13,11 +13,9 @@ export default function withLoading<Config: {}>(
     function LoadingComponent(props: Props) {
         if (props.isLoading) {
             return (
-                <main>
-                    <div className='with-loading text-center'>
-                        <Spinner animation='border' role='status' />
-                    </div>
-                </main>
+                <div className='with-loading text-center'>
+                    <Spinner animation='border' role='status' />
+                </div>
             );
         }
 

@@ -1,19 +1,35 @@
 // @flow
 import React from 'react';
-import Typography from '../../components/base/Typography/Typography';
+import { Switch } from 'react-router-dom';
+import { RouteWithSubRoutes } from '../App/AppContainer';
 import Tabs from '../../components/base/Tabs/Tabs';
 import './contract-management.scss';
+import Typography from '../../components/base/Typography/Typography';
 
 type Props = {
-    // TODO add props here
+    routes: Array<any>,
+    isParentRoute: boolean
 }
 
-export default function ManagementScreen(_: Props): React$Element<any> {
+export default function ManagementScreen({ routes, isParentRoute }: Props): React$Element<any> {
     return (
         <div className='contract-management'>
             <Tabs />
+
             <div className='contract-management__content'>
-                <Typography>hello</Typography>
+                {isParentRoute && (
+                    <div className='contract-management__content-main'>
+                        <Typography variant='size-16' weight='semi-bold'>
+                            Contract Management
+                        </Typography>
+                    </div>
+                )}
+
+                <Switch>
+                    {routes.map((route, i) =>
+                        <RouteWithSubRoutes key={i} {...route} />
+                    )}
+                </Switch>
             </div>
         </div>
     );

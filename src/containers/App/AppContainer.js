@@ -13,7 +13,7 @@ import Navbar from '../../components/base/Navbar/Navbar';
 import { clearModalContent } from '../../redux/modules/modalEvent';
 
 const loading = () => (
-    <div>
+    <div className='flex-centered h-100'>
         <Spinner animation='border' role='status'>
             <span className='sr-only'>Loading...</span>
         </Spinner>
@@ -39,19 +39,20 @@ function App() {
 
     return (
         <AppLoadingContainer>
-            <div id='outer-container'>
-                {pathname.includes('management') && (
-                    <CollapsibleSidebar className='p-2'>
-                        <SearchContract />
-                        <ContractInformation />
-                    </CollapsibleSidebar>
-                )}
+            <React.Suspense fallback={loading()}>
 
-                <div className='w-100'>
-                    {isAuthed && (
-                        <Navbar />
+                <div id='outer-container'>
+                    {pathname.includes('management') && (
+                        <CollapsibleSidebar className='p-2'>
+                            <SearchContract />
+                            <ContractInformation />
+                        </CollapsibleSidebar>
                     )}
-                    <React.Suspense fallback={loading()}>
+
+                    <div className='w-100'>
+                        {isAuthed && (
+                            <Navbar />
+                        )}
                         <div id='page-wrap'>
                             <Switch>
                                 {routes.map((route, i) => (
@@ -59,9 +60,9 @@ function App() {
                                 ))}
                             </Switch>
                         </div>
-                    </React.Suspense>
+                    </div>
                 </div>
-            </div>
+            </React.Suspense>
 
             <FlashNotification/>
             <AppModal
@@ -87,5 +88,7 @@ function RouteWithSubRoutes(route) {
             )} />
     );
 }
+
+export { RouteWithSubRoutes };
 
 export default App;
