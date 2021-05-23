@@ -22,7 +22,7 @@ function PotentialVOScreen({ variationOrder, changeList, handleToggleForm }: Pro
                 className='mt-2'
                 onButtonClick={() => handleToggleForm('add')}/>
 
-            <div className='contract-management__content-details mx-3'>
+            <div className='potential-vo__content'>
                 <TableDetails
                     headers={['dateIdentified', 'reason', 'descriptionOfChange', 'remarks', 'statusStage', 'edit']}
                     list={changeList}/>

@@ -26,15 +26,20 @@ body {
     background: rgba(203, 203, 210, 0.15);
     overflow: hidden;
     display: flex;
+}
 
+#content {
+    float: none;
+    overflow: hidden;
+    width: 100%;
 }
 
 #page-wrap {
     position: relative;
     z-index: 0;
     contain: layout;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
     height: calc(100% - 60px);
 }
 

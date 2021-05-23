@@ -8,11 +8,10 @@
     overflow: hidden;
 
     &__content {
-        width: 100%;
-        height: calc(100% - 32px);
-        display: flex;
+        width: 100%; 
+        height: calc(100% - 43px);
         background-color: $color-background;
-        overflow: scroll;
+        padding: 5px 0;
         
         &-main {
             padding: 15px 10px;

@@ -1,13 +1,16 @@
 import React from 'react';
 
-const Home = React.lazy(() => import('../containers/Home/HomeContainer'));
-const Login = React.lazy(() => import('../containers/Login/LoginContainer'));
-const NotFound = React.lazy(() => import('../containers/NotFound/NotFoundContainer'));
-const Dashboard = React.lazy(() => import('../containers/Dashboard/DashboardContainer'));
-const Management = React.lazy(() => import('../containers/ContractManagement/ContractManagementContainer'));
-const SuspensionResumption = React.lazy(() => import('../containers/SuspensionResumption/SuspensionResumptionContainer'));
-const TimeExtension = React.lazy(() => import('../containers/TimeExtension/TimeExtensionContainer'));
-const PotentialVO = React.lazy(() => import('../containers/PotentialVO/PotentialVOContainer'));
+import Home from '../containers/Home/HomeContainer';
+import Login from '../containers/Login/LoginContainer';
+import NotFound from '../containers/NotFound/NotFoundContainer';
+import Dashboard from '../containers/Dashboard/DashboardContainer';
+import Management from '../containers/ContractManagement/ContractManagementContainer';
+import SuspensionResumption from '../containers/SuspensionResumption/SuspensionResumptionContainer';
+import TimeExtension from '../containers/TimeExtension/TimeExtensionContainer';
+import PotentialVO from '../containers/PotentialVO/PotentialVOContainer';
+import ConstructionSchedule from '../containers/ConstructionSchedule/ConstructionScheduleContainer';
+import ConstructionScheduleApproved from '../containers/ConstructionScheduleApproved/ConstructionScheduleApprovedContainer';
+import ConstructionScheduleRevised from '../containers/ConstructionScheduleRevised/ConstructionScheduleRevisedContainer';
 // ROUTE IMPORT CODE GENERATOR INDICATOR DO NOT DELETE
 
 const routes = [{
@@ -21,29 +24,42 @@ const routes = [{
     component: Home
 }, {
     path: '/dashboard',
-    name: Dashboard,
+    name: 'Dashboard',
     component: Dashboard
 }, {
     path: '/contract-management',
-    name: Management,
+    name: 'Management',
     component: Management,
     routes: [{
+        path: '/contract-management/construction-schedule',
+        name: 'ConstructionSchedule',
+        component: ConstructionSchedule,
+        routes: [{
+            path: '/contract-management/construction-schedule/approved',
+            name: 'ConstructionScheduleApproved',
+            component: ConstructionScheduleApproved
+        }, {
+            path: '/contract-management/construction-schedule/revised',
+            name: 'ConstructionScheduleRevised',
+            component: ConstructionScheduleRevised
+        }]
+    }, {
         path: '/contract-management/time-variance/suspension_resumption',
-        name: SuspensionResumption,
+        name: 'SuspensionResumption',
         component: SuspensionResumption
     }, {
         path: '/contract-management/time-variance/time-extension',
-        name: TimeExtension,
+        name: 'TimeExtension',
         component: TimeExtension
     }, {
         path: '/contract-management/potential-vo',
-        name: PotentialVO,
+        name: 'PotentialVO',
         component: PotentialVO
     }]
 }, // ROUTE ENTRY CODE GENERATOR INDICATOR DO NOT DELETE
 {
     path: '*',
-    name: NotFound,
+    name: 'NotFound',
     component: NotFound
 }];
 

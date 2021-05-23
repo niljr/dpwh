@@ -21,7 +21,7 @@ function TimeExtensionScreen({ data, handleToggleForm }: Props): React$Element<a
                 buttonIcon={FaPrint}
                 onButtonClick={() => handleToggleForm('add')}/>
 
-            <div className='mx-3 mb-3'>
+            <div className='time-extension__content'>
                 <TableDetails
                     headers={[
                         'suspensionOrderNo', 'extent', 'description', 'approvalLevel', 'approvedBy', 'designation',

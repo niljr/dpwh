@@ -1,6 +1,7 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { setFlashNotification } from '../../redux/modules/flashNotification';
 import Button from '../../components/base/Button/Button';
 import DashboardScreen from './DashboardScreen';
@@ -9,6 +10,7 @@ import Typography from '../../components/base/Typography/Typography';
 
 export default function DashboardContainer(): React$Element<any> {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [isLoading, setIsLoading] = useState(true);
     const [assignments, setAssignments] = useState([]);
@@ -66,6 +68,7 @@ export default function DashboardContainer(): React$Element<any> {
 
     const handleSelect = (id: string) => {
         // console.log(id);
+        history.push(`/contract-management?contractId=${id}`);
     };
 
     const getFilteredAssignments = () => {

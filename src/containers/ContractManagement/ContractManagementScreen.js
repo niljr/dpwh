@@ -8,13 +8,14 @@ import Typography from '../../components/base/Typography/Typography';
 
 type Props = {
     routes: Array<any>,
-    isParentRoute: boolean
+    isParentRoute: boolean,
+    tabItems: Array<Object>
 }
 
-export default function ManagementScreen({ routes, isParentRoute }: Props): React$Element<any> {
+export default function ManagementScreen({ routes, isParentRoute, tabItems }: Props): React$Element<any> {
     return (
         <div className='contract-management'>
-            <Tabs />
+            <Tabs items={tabItems} isMainTabs={true} />
 
             <div className='contract-management__content'>
                 {isParentRoute && (

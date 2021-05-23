@@ -5,9 +5,10 @@
 .tabs {
     display: flex;
     margin-top: 8px;
+    border-bottom: 1px solid $color-brand-7;
 
     &__item {
-        background-color: $color-brand-6;
+        background-color: $color-background;
         cursor: pointer;
         margin-left: 3px;
         padding: 5px 10px;
@@ -16,24 +17,37 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        height: 32px;
+        // border: 1px solid $color-brand-4;
 
         &:hover {
-            background-color: lighten($color-brand-6, 10%);
+            background-color: lighten($color-brand-7, 10%);
+
+            .tabs__item-label {
+                color: $color-background;
+            }
+        }
+
+        &.active {
+            background-color: $color-brand-7;
+
+            .tabs__item-label {
+                color: $color-background;
+            }
         }
 
         &-label {
-            margin-left: 8px;
             white-space: pre;
             text-align: center;
             line-height: 14px !important;
+
+            &.-withIcon {
+                margin-left: 8px;
+            }
         }
 
         &:first-of-type {
             margin-left: 5px;
-        }
-
-        &.active {
-            background-color: $color-background;
         }
 
         &-submenu {
@@ -60,5 +74,36 @@
 
     &__wrapper {
         position: relative;
+
+        &:first-of-type {
+            .tabs__item {
+                margin-left: 0;
+            }
+        }
     }
+
+    &.-isMainTabs {
+        border-bottom: unset;
+
+        .tabs__item {
+            background-color: $color-brand-6;
+    
+            &.active {
+                background-color: $color-background;
+            }
+    
+            &:hover:not(.active) {
+                background-color: lighten($color-brand-6, 10%);
+            }
+
+            &-label {
+                color: $color-brand-2;
+            }
+
+            &:first-of-type {
+                margin-left: 5px;
+            }
+        }
+    }
+
 }

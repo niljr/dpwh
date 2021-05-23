@@ -11,7 +11,9 @@
     &__wrapper {
         padding: 1.5rem 1.75rem;
         margin: 10px;
-        background-color: $color-background;
+        background-color: $color-background; 
+        height: calc(100% - 15px);
+        overflow-y: scroll;
     }
 
     &__header {
@@ -36,7 +38,7 @@
             margin-bottom: 10px; 
             
             &__icon {
-                margin-top: 5px;
+                margin-top: 2px;
             }
         }
     }

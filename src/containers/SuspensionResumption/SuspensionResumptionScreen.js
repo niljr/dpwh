@@ -16,7 +16,7 @@ function SuspensionResumptionScreen({ data }: Props): React$Element<any> {
                 label='Suspension / Resumption'
                 className='mt-2'/>
 
-            <div className='mx-3 mb-3'>
+            <div className='suspension-resumption__content'>
                 <TableDetails
                     headers={[
                         'suspensionOrderNo', 'extent', 'description', 'approvalLevel', 'approvedBy', 'designation',

@@ -3,5 +3,9 @@
 @import '../../styles/utils/_mixins';
 
 .suspension-resumption {
-
+    &__content {
+        margin: 0 1rem;
+        overflow: scroll;
+        height: calc(100vh - 145px);
+    }
 }

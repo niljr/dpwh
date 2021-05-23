@@ -39,30 +39,27 @@ function App() {
 
     return (
         <AppLoadingContainer>
-            <React.Suspense fallback={loading()}>
+            <div id='outer-container'>
+                {pathname.includes('management') && (
+                    <CollapsibleSidebar className='p-2'>
+                        <SearchContract />
+                        <ContractInformation />
+                    </CollapsibleSidebar>
+                )}
 
-                <div id='outer-container'>
-                    {pathname.includes('management') && (
-                        <CollapsibleSidebar className='p-2'>
-                            <SearchContract />
-                            <ContractInformation />
-                        </CollapsibleSidebar>
+                <div id='content'>
+                    {isAuthed && (
+                        <Navbar />
                     )}
-
-                    <div className='w-100'>
-                        {isAuthed && (
-                            <Navbar />
-                        )}
-                        <div id='page-wrap'>
-                            <Switch>
-                                {routes.map((route, i) => (
-                                    <RouteWithSubRoutes key={i} {...route} />
-                                ))}
-                            </Switch>
-                        </div>
+                    <div id='page-wrap'>
+                        <Switch>
+                            {routes.map((route, i) => (
+                                <RouteWithSubRoutes key={i} {...route} />
+                            ))}
+                        </Switch>
                     </div>
                 </div>
-            </React.Suspense>
+            </div>
 
             <FlashNotification/>
             <AppModal

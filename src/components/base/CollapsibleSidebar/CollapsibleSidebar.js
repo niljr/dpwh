@@ -27,7 +27,7 @@ export default function CollapsibleSidebar({
             <Brand className='collapsible-sidebar__brand'/>
             <div className='collapsible-sidebar__control'>
                 <div onClick={handleToggleSidebar} className='collapsible-sidebar__control-button'>
-                    <Icon color='#fff' size={20} className='m-3'/>
+                    <Icon color='#fff' size={18}/>
                 </div>
             </div>
 

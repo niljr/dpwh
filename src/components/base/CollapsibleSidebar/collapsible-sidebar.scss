@@ -10,6 +10,7 @@
     color: $color-brand-3;
     flex: 0 0 $sidebar-width;
     position: relative;
+    float: left;
 
     &.is-open {
         width: 70px;
@@ -27,11 +28,13 @@
         border-radius: $border-radius-large;
         position: absolute;
         bottom: 30px;
-        right: -20px;
+        right: -15px;
         z-index: 1;
 
         &-button {
             cursor: pointer;
+            padding: 10px;
+            display: flex;
         }
     }
 

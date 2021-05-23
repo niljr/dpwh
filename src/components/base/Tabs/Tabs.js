@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect, useState } from 'react';
-import { FaLightbulb, FaClock, FaSortDown } from 'react-icons/fa';
+import { FaSortDown } from 'react-icons/fa';
 import { Dropdown } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import Typography from '../Typography/Typography';
@@ -8,30 +8,12 @@ import CustomToggle from '../CustomToggle';
 import './tabs.scss';
 
 type Props = {
-    className?: string
+    className?: string,
+    items: Array<Object>,
+    isMainTabs?: boolean
 }
 
-const items = [
-    // { label: 'Statement of Work\nAccomplished', key: 'accomplished', icon: FaMedal },
-    // { label: 'Billing', key: 'billing', icon: FaReceipt },
-    // { label: 'Actual Work Activity', key: 'actual-work', icon: FaSnowplow },
-    {
-        label: 'Time Variance',
-        key: 'time-variance',
-        icon: FaClock,
-        route: null,
-        subMenu: [
-            { label: 'Suspension/Resumption', route: '/contract-management/time-variance/suspension_resumption' },
-            { label: 'Time Extension', route: '/contract-management/time-variance/time-extension' }
-        ]
-    },
-    { label: 'Potential VO', key: 'potential-vo', icon: FaLightbulb, route: '/contract-management/potential-vo', subMenu: null }
-    // { label: 'Milestones', key: 'milestones', icon: FaTasks },
-    // { label: 'Monthly/Weekly\nReviews', key: 'reviews', icon: FaCalendarCheck },
-    // { label: 'Actual Outputs', key: 'actual-output', icon: FaRoad }
-];
-
-export default function Tabs({ className = '' }: Props): React$Element<any> {
+export default function Tabs({ className = '', items, isMainTabs }: Props): React$Element<any> {
     const history = useHistory();
     const { pathname } = useLocation();
 
@@ -46,7 +28,7 @@ export default function Tabs({ className = '' }: Props): React$Element<any> {
     };
 
     return (
-        <div className={`tabs ${className}`} >
+        <div className={`tabs ${className}${isMainTabs ? ' -isMainTabs' : ''}`} >
             {items.map(tab =>
                 <div className='tabs__wrapper'>
                     {tab.subMenu
@@ -55,11 +37,11 @@ export default function Tabs({ className = '' }: Props): React$Element<any> {
                                 <div
                                     onClick={() => handleSelectTab(tab.key, tab.route)}
                                     className={`tabs__item${pathname.includes(tab.key) ? ' active' : ''}${tab.subMenu ? ' -with-submenu' : ''}`}>
-                                    <tab.icon size={22}/>
+                                    {tab.icon && <tab.icon size={22}/>}
                                     <Typography
                                         variant='size-14'
                                         weight='semi-bold'
-                                        className='tabs__item-label'>
+                                        className={`tabs__item-label ${tab.icon ? '-withIcon' : ''}`}>
                                         {tab.label}
                                     </Typography>
                                     <FaSortDown className='mb-1 ml-2' />
@@ -81,11 +63,11 @@ export default function Tabs({ className = '' }: Props): React$Element<any> {
                             key={tab.key}
                             className={`tabs__item${pathname.includes(tab.key) ? ' active' : ''}${tab.subMenu ? ' -with-submenu' : ''}`}
                             onClick={() => handleSelectTab(tab.key, tab.route)}>
-                            <tab.icon size={22}/>
+                            {tab.icon && <tab.icon size={22}/>}
                             <Typography
                                 variant='size-14'
                                 weight='semi-bold'
-                                className='tabs__item-label'>
+                                className={`tabs__item-label ${tab.icon ? '-withIcon' : ''}`}>
                                 {tab.label}
                             </Typography>
                         </div>
