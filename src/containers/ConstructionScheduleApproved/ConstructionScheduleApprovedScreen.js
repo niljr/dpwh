@@ -6,17 +6,17 @@ import SectionWithAction from '../../components/base/SectionWithAction/SectionWi
 import './construction-schedule-approved.scss';
 
 type Props = {
-    // TODO add props here
+    handleAddRevision: () => void
 }
 
-export default function ConstructionScheduleApprovedScreen(_: Props): React$Element<any> {
+export default function ConstructionScheduleApprovedScreen({ handleAddRevision }: Props): React$Element<any> {
     return (
         <div className='construction-schedule-approved'>
             <SectionWithAction
                 label='Revisions'
                 className='mt-2'
-                onButtonClick={() => {}}
-                buttonLabel='ADD REVISIONS'
+                onButtonClick={handleAddRevision}
+                buttonLabel='ADD REVISION'
                 buttonIcon={FaPlus} />
             <TableDetails
                 headers={[

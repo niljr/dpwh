@@ -5,7 +5,7 @@
 .tabs {
     display: flex;
     margin-top: 8px;
-    border-bottom: 1px solid $color-brand-7;
+    border-bottom: 1px solid $color-brand-darkBlue;
 
     &__item {
         background-color: $color-background;
@@ -18,10 +18,10 @@
         align-items: center;
         justify-content: center;
         height: 32px;
-        // border: 1px solid $color-brand-4;
+        // border: 1px solid $color-brand-lightGray;
 
         &:hover {
-            background-color: lighten($color-brand-7, 10%);
+            background-color: lighten($color-brand-darkBlue, 10%);
 
             .tabs__item-label {
                 color: $color-background;
@@ -29,7 +29,7 @@
         }
 
         &.active {
-            background-color: $color-brand-7;
+            background-color: $color-brand-darkBlue;
 
             .tabs__item-label {
                 color: $color-background;
@@ -86,18 +86,18 @@
         border-bottom: unset;
 
         .tabs__item {
-            background-color: $color-brand-6;
+            background-color: $color-brand-orange;
     
             &.active {
                 background-color: $color-background;
             }
     
             &:hover:not(.active) {
-                background-color: lighten($color-brand-6, 10%);
+                background-color: lighten($color-brand-orange, 10%);
             }
 
             &-label {
-                color: $color-brand-2;
+                color: $color-brand-dark;
             }
 
             &:first-of-type {

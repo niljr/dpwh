@@ -30,29 +30,29 @@ $border-radius-large: 10px;
 $color-background: #fff;
 
 // color: brand
-$color-brand-1: #0094fe;
-$color-brand-2: #464646;
-$color-brand-3: #EFEFEF;
-$color-brand-4: #d1d1d1;
-$color-brand-5: #919191;
-$color-brand-6: #ffa34d;
-$color-brand-7: #1d4e8e;
+$color-brand-blue: #0094fe;
+$color-brand-dark: #464646;
+$color-brand-light: #EFEFEF;
+$color-brand-lightGray: #d1d1d1;
+$color-brand-gray: #919191;
+$color-brand-orange: #ffa34d;
+$color-brand-darkBlue: #1d4e8e;
 
 // color: font
-$color-font-base: $color-brand-2;
+$color-font-base: $color-brand-dark;
 
-$color-primary: $color-brand-1;
+$color-primary: $color-brand-blue;
 $color-secondary: #786c90;
 $color-success: #65ad7b;
 $color-warning: #e7b167;
 $color-info: #60a9ca;
 $color-danger: #d5746d;
-$color-light: $color-brand-5;
-$color-dark: $color-brand-7;
+$color-light: $color-brand-gray;
+$color-dark: $color-brand-darkBlue;
 
 // colors: links
-$color-link: $color-brand-1;
-$color-link-hover: lighten($color-brand-1, 15%);
+$color-link: $color-brand-blue;
+$color-link-hover: lighten($color-brand-blue, 15%);
 
 // color: dividers/borders
 $color-divider: #EFEFEF;

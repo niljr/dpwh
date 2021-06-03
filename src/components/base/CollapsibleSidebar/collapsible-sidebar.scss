@@ -3,11 +3,11 @@
 @import '../../../styles/utils/_mixins';
 
 .collapsible-sidebar {
-    background-color: $color-brand-6;
+    background-color: $color-brand-orange;
     height: 100%;
     width: $sidebar-width;
     transition: all 0.3s;
-    color: $color-brand-3;
+    color: $color-brand-light;
     flex: 0 0 $sidebar-width;
     position: relative;
     float: left;
@@ -18,13 +18,13 @@
     }
 
     &__brand {
-        border-bottom: 2px solid $color-brand-7;
+        border-bottom: 2px solid $color-brand-darkBlue;
     }
 
     &__control {
         display: flex;
         justify-content: flex-end;
-        background-color: $color-brand-6;
+        background-color: $color-brand-orange;
         border-radius: $border-radius-large;
         position: absolute;
         bottom: 30px;
@@ -40,6 +40,8 @@
 
     &__content {
         transition: all 0.3s;
+        overflow-y: scroll;
+        height: calc(100vh - 65px) !important;
 
         &.is-visible {
             display: none;

@@ -3,5 +3,16 @@
 @import '../../../styles/utils/_mixins';
 
 .modal {
+    &-header {
+        padding: 0.7rem 1rem !important;
+        background-color: $color-brand-darkBlue;
 
+        .close {
+            color: $color-background !important;
+        }
+    }
+
+    &-title {
+        color: $color-background !important;
+    }
 }
