@@ -45,7 +45,7 @@ export default function Form({
             : null;
 
     const renderControl = (control: any) => {
-        console.log(control.name, data[control.name]);
+        // console.log(control.name, data[control.name]);
 
         return (
             <>
@@ -53,9 +53,9 @@ export default function Form({
                     size={formSize}
                     as={control.formControl || 'input'}
                     type={control.inputType || 'text'}
-                    value={data[`${control.name}`]}
+                    // value={data[`${control.name}`]}
                     placeholder={control.placeholder}
-                    defaultValue={data.hasOwnProperty(control.name) ? data[control.name] : null}
+                    // defaultValue={data.hasOwnProperty(control.name) ? data[control.name] : null}
                     {...register(control.name, control.validationConfig)}
                     isInvalid={(errors[control.name])}>
                     {control.formControl === 'select'

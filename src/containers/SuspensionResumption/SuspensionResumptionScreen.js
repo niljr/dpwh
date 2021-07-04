@@ -1,20 +1,26 @@
 // @flow
 import React from 'react';
+import { FaPlus, FaArrowRight } from 'react-icons/fa';
 import SectionWithAction from '../../components/base/SectionWithAction/SectionWithAction';
 import TableDetails from '../../components/base/TableDetails/TableDetails';
+import Button from '../../components/base/Button/Button';
 import withLoading from '../../components/modules/withLoading/withLoading';
+
 import './suspension-resumption.scss';
 
 type Props = {
     data: Array<any>
 }
 
-function SuspensionResumptionScreen({ data }: Props): React$Element<any> {
+function SuspensionResumptionScreen({ data, handleOnClick }: Props): React$Element<any> {
     return (
         <div className='suspension-resumption'>
             <SectionWithAction
                 label='Suspension / Resumption'
-                className='mt-2'/>
+                buttonLabel= 'Add Work Suspension Order'
+                className='mt-2'
+                buttonIcon={FaPlus}
+                onButtonClick={() => handleOnClick()} />
 
             <div className='suspension-resumption__content'>
                 <TableDetails
