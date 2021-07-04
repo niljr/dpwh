@@ -61,16 +61,20 @@
     }
 
     &.color {
-        &-1 {
+        &-blue {
             color: $color-brand-blue;
         }
 
-        &-2 {
+        &-dark {
             color: $color-brand-dark;
         }
 
-        &-3 {
+        &-light {
             color: $color-brand-light;
+        }
+
+        &-danger {
+            color: $color-danger;
         }
     }
 

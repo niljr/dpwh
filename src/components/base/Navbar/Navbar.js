@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { IoIosNotifications, IoMdArrowDropdown } from 'react-icons/io';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setModalContent } from '../../../redux/modules/modalEvent';
 import Typography from '../Typography/Typography';
 import Brand from '../Brand/Brand';
+import AddTask from '../../modules/AddTask/AddTask';
 import CustomToggle from '../CustomToggle';
 import './navbar.scss';
 
@@ -12,12 +15,18 @@ type Props = {
     className?: string
 }
 
-type Menu = {label: string | null, route: string | null, isDivider: null | boolean};
+type Menu = {label: string | null, route?: string, component?: any | null, isDivider: null | boolean};
 
 export default function AppNavbar({ className = '' }: Props): React$Element<any> {
+    const dispatch = useDispatch();
+
     const menu: Array<Menu> = [{
         label: 'Home',
         route: '/dashboard',
+        isDivider: false
+    }, {
+        label: 'Add Task',
+        component: AddTask,
         isDivider: false
     }, {
         label: 'Contract Management',
@@ -25,8 +34,7 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
         isDivider: false
     }, {
         isDivider: true,
-        label: null,
-        route: null
+        label: null
     }, {
         label: 'Sign Out',
         route: '/login',
@@ -46,8 +54,18 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
         setCurrentMenu(getCurrentMenu());
     }, [pathname]);
 
-    const handleOnClick = (route) => {
-        history.push(route);
+    const handleOnClick = (item) => {
+        if (item.route) {
+            history.push(item.route);
+        } else {
+            const Component: any = item.component;
+
+            dispatch(setModalContent({
+                modalContent: <Component />,
+                title: 'Add Task',
+                size: 'lg'
+            }));
+        }
     };
 
     return (
@@ -59,7 +77,7 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
                 </div>
                 <Dropdown>
                     <Dropdown.Toggle as={CustomToggle} id='dropdown-custom-components' className='navbar__toggle'>
-                        <Typography color={isDashboard ? 'color-2' : 'color-3'}>
+                        <Typography color={isDashboard ? 'color-dark' : 'color-light'}>
                             {currentMenu?.label} <IoMdArrowDropdown size={20}/>
                         </Typography>
                     </Dropdown.Toggle>
@@ -68,7 +86,7 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
                         {menu.filter(m => m.label !== currentMenu?.label).map(item =>
                             item.isDivider
                                 ? <Dropdown.Divider key={item.route}/>
-                                : <Dropdown.Item onClick={() => handleOnClick(item.route)} key={item.route}>{item.label}</Dropdown.Item>
+                                : <Dropdown.Item onClick={() => handleOnClick(item)} key={item.route}>{item.label}</Dropdown.Item>
                         )}
                     </Dropdown.Menu>
                 </Dropdown>

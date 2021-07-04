@@ -12,25 +12,25 @@ export default function LoginContainer(): React$Element<any> {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [isProcessing, setIsProcessing] = useState(false);
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: ''
     });
 
-    const onSubmit = e => {
-        e.preventDefault();
+    const onSubmit = (data) => {
+        console.log('submit', data);
+        setIsProcessing(true);
 
         try {
-            if (isValidEmail(loginForm.email) && loginForm.password) {
-                // TODO:
-                // call api to authenticate user and redirect to dashboard
+            // TODO:
+            // call api to authenticate user and redirect to dashboard
 
-                dispatch(authUser({
-                    // TODO set user data
-                }));
-
+            setTimeout(() => {
+                setIsProcessing(false);
                 history.replace('/dashboard');
-            }
+                dispatch(authUser(data));
+            }, 500);
         } catch (err) {
             dispatch(setFlashNotification({
                 message: 'ERROR',
@@ -48,5 +48,8 @@ export default function LoginContainer(): React$Element<any> {
         });
     };
 
-    return <Login onSubmit={onSubmit} onChange={onChange}/>;
+    return <Login
+        onSubmit={onSubmit}
+        onChange={onChange}
+        isProcessing={isProcessing} />;
 }

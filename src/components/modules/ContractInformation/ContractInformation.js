@@ -27,18 +27,30 @@ export default function ContractInformation({ className = '' }: Props): React$El
         status: { label: 'Implementation Status', value: currentContract.status.toUpperCase() }
     });
 
-    const [data, setData] = useState(prepareData());
+    const [data, setData] = useState(currentContract ? prepareData() : {});
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setData(prepareData());
+        if (currentContract) {
+            setIsLoading(true);
+
+            setTimeout(() => {
+                setData(prepareData());
+                setIsLoading(false);
+            }, 400);
+        }
     }, [currentContract]);
+
+    if (isLoading) {
+        return <div />;
+    }
 
     return (
         <Card
             className='contract-information'
             header={<div className='flex-spaced'>
                 <Typography
-                    color='color-3'
+                    color='color-light'
                     className='contract-information__header'
                     weight='semi-bold'
                     variant='size-16'>
@@ -73,7 +85,7 @@ export default function ContractInformation({ className = '' }: Props): React$El
 
             <div className='contract-information__sub-header'>
                 <Typography
-                    color='color-3'
+                    color='color-light'
                     weight='semi-bold'>
                     Project Components
                 </Typography>

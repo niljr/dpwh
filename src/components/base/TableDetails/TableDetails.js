@@ -22,7 +22,7 @@ export default function TableDetails({ className = '', headers, list }: Props): 
                     <tr>
                         {headers.map((label, i) =>
                             <th className='table__header' key={i}>
-                                <Typography color='color-3' weight='semi-bold'>{camelToReadableText(label)}</Typography>
+                                <Typography color='color-light' weight='semi-bold'>{camelToReadableText(label)}</Typography>
                             </th>
                         )}
                     </tr>

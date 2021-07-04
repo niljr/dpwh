@@ -2,6 +2,38 @@
 @import '../../../styles/utils/_variables';
 @import '../../../styles/utils/_mixins';
 
-.form {
+.app-form {
+    &__submit {
+        width: 100%;
+    }
 
+    input:focus, select:focus, textarea:focus {
+        border-color: $color-brand-darkBlue;
+        box-shadow: 0 0 0 0.2rem rgba($color-brand-darkBlue, 0.4);
+    }
+
+    .react-datepicker {
+        &-wrapper {
+            display: inline;
+        }
+
+        &__input-container {
+            input {
+                width: 100% !important;
+                background: url('../../../assets/icons/calendar.svg') no-repeat 98%;
+                background-size: 15px;
+                border: 1px solid #ced4da;
+                border-radius: 3px;
+                height: 27.8px;
+
+                &:focus-visible {
+                    outline: 0;
+                }
+
+                &:focus {
+                    border-color: $color-brand-darkBlue;
+                }
+            }
+        }
+    }
 }

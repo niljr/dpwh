@@ -7,6 +7,7 @@ import Button from '../../components/base/Button/Button';
 import DashboardScreen from './DashboardScreen';
 import dummy from './dummy.json';
 import Typography from '../../components/base/Typography/Typography';
+import { updateSearch } from '../../redux/modules/contract';
 
 export default function DashboardContainer(): React$Element<any> {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ export default function DashboardContainer(): React$Element<any> {
                 return {
                     ...assignment,
                     idComponent: <Button onClick={() => handleSelect(assignment.id)} className='dashboard__data-id' variant='success'>
-                        <Typography variant='size-12' color='color-3' weight='semi-bold'>{assignment.id}</Typography>
+                        <Typography variant='size-12' color='color-light' weight='semi-bold'>{assignment.id}</Typography>
                     </Button>,
                     date: `${assignment.effectivityDate} -
                     ${assignment.expiryDate}`
@@ -67,8 +68,11 @@ export default function DashboardContainer(): React$Element<any> {
     };
 
     const handleSelect = (id: string) => {
-        // console.log(id);
-        history.push(`/contract-management?contractId=${id}`);
+        dispatch(updateSearch({
+            searchIdType: 'contract_id',
+            searchId: id
+        }));
+        history.push('/contract-management');
     };
 
     const getFilteredAssignments = () => {

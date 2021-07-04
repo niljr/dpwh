@@ -32,7 +32,7 @@ export function setLoggingOut(): {} {
 }
 
 const initialState = {
-    isAuthed: true,
+    isAuthed: false,
     isLoggingOut: false,
     profileData: {},
     userToken: null

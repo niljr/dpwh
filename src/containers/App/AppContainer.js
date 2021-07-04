@@ -1,24 +1,16 @@
 import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Spinner from 'react-bootstrap/Spinner';
+// import Spinner from 'react-bootstrap/Spinner';
 import routes from '../../config/routes';
 import AppLoadingContainer from '../AppLoading/AppLoadingContainer';
 import AppModal from '../../components/base/Modal/Modal';
 import FlashNotification from '../../components/modules/FlashNotification/FlashNotification';
-import SearchContract from '../../components/modules/SearchContract/SearchContract';
+import SearchContract from '../../components/modules/SearchContract/SearchContractContainer';
 import ContractInformation from '../../components/modules/ContractInformation/ContractInformation';
 import CollapsibleSidebar from '../../components/base/CollapsibleSidebar/CollapsibleSidebarContainer';
 import Navbar from '../../components/base/Navbar/Navbar';
 import { clearModalContent } from '../../redux/modules/modalEvent';
-
-const loading = () => (
-    <div className='flex-centered h-100'>
-        <Spinner animation='border' role='status'>
-            <span className='sr-only'>Loading...</span>
-        </Spinner>
-    </div>
-);
 
 function App() {
     const dispatch = useDispatch();
@@ -51,7 +43,7 @@ function App() {
                     {isAuthed && (
                         <Navbar />
                     )}
-                    <div id='page-wrap'>
+                    <div id='page-wrap' className={isAuthed ? '-authed' : ''}>
                         <Switch>
                             {routes.map((route, i) => (
                                 <RouteWithSubRoutes key={i} {...route} />

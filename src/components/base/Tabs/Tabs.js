@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FaSortDown } from 'react-icons/fa';
 import { Dropdown } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
@@ -30,7 +30,7 @@ export default function Tabs({ className = '', items, isMainTabs }: Props): Reac
     return (
         <div className={`tabs ${className}${isMainTabs ? ' -isMainTabs' : ''}`} >
             {items.map(tab =>
-                <div className='tabs__wrapper'>
+                <div className='tabs__wrapper' key={tab.key}>
                     {tab.subMenu
                         ? <Dropdown key={tab.key}>
                             <Dropdown.Toggle as={CustomToggle} >

@@ -21,6 +21,8 @@ app.get('/', (req, res) => {
   });
 });
 
+console.log('api', api)
+
 app.use('/api/v1', api);
 
 app.use(middlewares.notFound);

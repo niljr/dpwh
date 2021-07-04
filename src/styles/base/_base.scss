@@ -38,9 +38,13 @@ body {
     position: relative;
     z-index: 0;
     contain: layout;
+    height: 100%;
     // overflow-y: scroll;
     // overflow-x: hidden;
-    height: calc(100% - 60px);
+
+    &.-authed {
+        height: calc(100% - 60px);
+    }
 }
 
 .safari-fix #page-wrap {

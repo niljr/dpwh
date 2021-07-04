@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Home from '../containers/Home/HomeContainer';
 import Login from '../containers/Login/LoginContainer';
 import NotFound from '../containers/NotFound/NotFoundContainer';

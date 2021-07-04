@@ -16,7 +16,7 @@ type Props = {
 export default function Typography({
     component,
     className = '',
-    color = 'color-2',
+    color = 'color-dark',
     variant = 'size-14',
     weight = 'regular',
     children,
