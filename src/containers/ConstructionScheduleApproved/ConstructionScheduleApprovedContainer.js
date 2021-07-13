@@ -11,7 +11,7 @@ export default function ConstructionScheduleApprovedContainer(): React$Element<a
     const handleAddRevision = () => {
         dispatch(setModalContent({
             modalContent: <RevisionForm />,
-            title: 'Login'
+            title: 'Revision'
         }));
     };
 
