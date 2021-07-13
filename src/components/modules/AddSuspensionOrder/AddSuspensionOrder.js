@@ -29,7 +29,8 @@ export default function AddSuspensionOrder({ className = '' }: Props): React$Ele
                 onSubmitForm={onSubmitForm}
                 structure={formStructure}
                 schema={schema}
-                formSize='sm'/>
+                formSize='sm'
+                withCloseButton={true}/>
         </div>
     );
 }
