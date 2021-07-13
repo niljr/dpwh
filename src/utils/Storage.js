@@ -1,8 +1,8 @@
 export default class Storage {
     static init() {
         try {
-            localStorage.setItem('oldst-test', 1);
-            localStorage.removeItem('oldst-test');
+            localStorage.setItem('dpwh-test', 1);
+            localStorage.removeItem('dpwh-test');
 
             this.storageType = localStorage;
         } catch (err) {

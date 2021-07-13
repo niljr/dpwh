@@ -5,7 +5,7 @@ import { useHistory } from 'react-router';
 import { setFlashNotification } from '../../redux/modules/flashNotification';
 import Button from '../../components/base/Button/Button';
 import DashboardScreen from './DashboardScreen';
-import dummy from './dummy.json';
+import { dummy } from './dummy';
 import Typography from '../../components/base/Typography/Typography';
 import { updateSearch } from '../../redux/modules/contract';
 

@@ -1,23 +1,30 @@
 const express = require('express');
-const monk = require('monk');
-const Joi = require('@hapi/joi');
-
-const db = monk(process.env.MONGO_URI);
-const users = db.get('users');
-
-const schema = Joi.object({
-    question: Joi.string().trim().required(),
-    answer: Joi.string().trim().required(),
-    video_url: Joi.string().uri()
-});
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../model/user');
 
 const router = express.Router();
 
 // Read ALL
 router.get('/', async (req, res, next) => {
     try {
-        const items = await users.find({});
+        const items = await User.find({});
         res.json(items);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Read ALL
+router.get('/getAllEngineers', async (req, res, next) => {
+    try {
+        const items = await User.find().where('role').all(['engineer']);
+
+        res.json(items.map(item => ({
+            id: item._id,
+            name: item.name,
+            position: item.position
+        })));
     } catch (error) {
         next(error);
     }
@@ -27,7 +34,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        const item = await users.findOne({
+        const item = await User.findOne({
             _id: id
         });
 
@@ -40,13 +47,52 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // Create One
-router.post('/', async (req, res, next) => {
+router.post('/createOne', async (req, res, next) => {
     try {
-        const value = await schema.validateAsync(req.body);
-        const inserted = await users.insert(value);
+        const { username, password: plainTextPassword } = req.body;
+
+        if (!username || typeof username !== 'string') {
+            return next({
+                message: 'Invalid username'
+            });
+        }
+
+        const password = await bcrypt.hash(plainTextPassword, 10);
+        const inserted = await User.create({
+            ...req.body,
+            password
+        });
 
         res.json(inserted);
     } catch (error) {
+        console.log('error', error.code);
+        if (error.code === 11000) {
+            return next({
+                message: 'Username already in use'
+            });
+        }
+
+        next(error);
+    }
+});
+
+router.post('/change-password', async (req, res, next) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        const user = jwt.verify(token, process.env.JWT_SECRET);
+
+        const _id = user._id;
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await User.update({
+            _id
+        }, { $set: { password: hashedPassword } });
+
+        res.json({ status: 'success' });
+    } catch (error) {
+        console.log(error)
         next(error);
     }
 });
@@ -56,11 +102,11 @@ router.put('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
         const value = await schema.validateAsync(req.body);
-        const item = await users.findOne({ _id: id });
+        const item = await User.findOne({ _id: id });
 
         if (!item) return next();
 
-        await users.update({
+        await User.update({
             _id: id
         }, { $set: value });
 
@@ -74,9 +120,14 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
+        const item = await User.findOne({ _id: id });
 
-        await users.remove({ _id: id });
-        // res.status(200).send('Success');
+        if (!item) return next();
+
+        await User.update({
+            _id: id
+        }, { $set: { is_deleted: true } });
+
         res.json({
             message: 'Success'
         });

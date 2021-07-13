@@ -5,12 +5,30 @@
     height: 100%;
     display: flex;
 
+    @include screen-sm {
+        display: inline;
+        overflow: auto;
+        // height: 100vh;
+    }
+
     &__wrapper {
         width: 50%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @include screen-sm {
+            width: 100%;
+
+            &:first-of-type {
+                height: 200px;
+            }
+
+            &:last-of-type {
+                height: calc(100% - 200px);
+            }
+        }
     }
 
     &__image {
@@ -25,5 +43,10 @@
         text-align: center;
         width: 50%;
         max-width: 350px;
+        margin-bottom: 15px;
+
+        .app-form {
+            margin-bottom: 15px;
+        }
     }
 }

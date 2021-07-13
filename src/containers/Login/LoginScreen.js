@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './login.scss';
 import Form from '../../components/base/Form/Form';
 import Typography from '../../components/base/Typography/Typography';
@@ -9,11 +10,10 @@ import schema from './loginSchema';
 
 type Props = {
     onSubmit: Function,
-    onChange: Function,
     isProcessing: boolean
 }
 
-export default function Login({ onSubmit, onChange, isProcessing }:Props): React$Element<any> {
+export default function Login({ onSubmit, isProcessing }:Props): React$Element<any> {
     return (
         <div className='login'>
             <div className='login__wrapper'>
@@ -38,6 +38,8 @@ export default function Login({ onSubmit, onChange, isProcessing }:Props): React
                         schema={schema}
                         submitLabel='Login'
                         isProcessing={isProcessing} />
+
+                    <Link to='/create-account'>Create an Account</Link>
                 </div>
             </div>
         </div>

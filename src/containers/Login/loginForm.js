@@ -1,5 +1,5 @@
 const form = [[
-    { label: 'Email', placeholder: 'Email', name: 'email', portion: 12, inputType: 'email' }
+    { label: 'Username', placeholder: 'Username', name: 'username', portion: 12 }
 ], [
     { label: 'Password', placeholder: 'Password', name: 'password', portion: 12, inputType: 'password' }
 ]];

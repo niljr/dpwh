@@ -1,7 +1,7 @@
 // @flow
 
 // Typography
-export type TypographyVariant = 'size-40' | 'size-34' | 'size-26' | 'size-24' | 'size-22' | 'size-20' | 'size-18' | 'size-16' | 'size-14' | 'size-12';
+export type TypographyVariant = 'size-40' | 'size-34' | 'size-26' | 'size-24' | 'size-22' | 'size-20' | 'size-18' | 'size-16' | 'size-14' | 'size-12' | 'size-11';
 export type Color = 'color-blue' | 'color-dark' | 'color-light' | 'color-danger';
 export type Weight = 'light' | 'regular' | 'semi-bold' | 'bold';
 
@@ -43,5 +43,6 @@ export type Input = {
         label: string
     }>,
     prepend?: string,
-    append?: string
+    append?: string,
+    isReadOnly?: boolean
 }

@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { IoIosNotifications, IoMdArrowDropdown } from 'react-icons/io';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setModalContent } from '../../../redux/modules/modalEvent';
+import { setLoggingOut } from '../../../redux/modules/authentication';
 import Typography from '../Typography/Typography';
 import Brand from '../Brand/Brand';
 import AddTask from '../../modules/AddTask/AddTask';
@@ -19,14 +20,11 @@ type Menu = {label: string | null, route?: string, component?: any | null, isDiv
 
 export default function AppNavbar({ className = '' }: Props): React$Element<any> {
     const dispatch = useDispatch();
+    const { profileData } = useSelector(({ authentication }) => authentication);
 
     const menu: Array<Menu> = [{
         label: 'Home',
         route: '/dashboard',
-        isDivider: false
-    }, {
-        label: 'Add Task',
-        component: AddTask,
         isDivider: false
     }, {
         label: 'Contract Management',
@@ -40,6 +38,16 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
         route: '/login',
         isDivider: false
     }];
+
+    if (profileData.role === 'admin') {
+        menu.splice(1, 0, {
+            label: 'Add Task',
+            component: AddTask,
+            isDivider: false
+        });
+
+        console.log(menu);
+    }
 
     const history = useHistory();
     const { pathname } = useLocation();
@@ -56,6 +64,10 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
 
     const handleOnClick = (item) => {
         if (item.route) {
+            if (item.route === '/login') {
+                dispatch(setLoggingOut());
+            }
+
             history.push(item.route);
         } else {
             const Component: any = item.component;
@@ -83,10 +95,10 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu align='right'>
-                        {menu.filter(m => m.label !== currentMenu?.label).map(item =>
+                        {menu.filter(m => m.label !== currentMenu?.label).map((item, m) =>
                             item.isDivider
-                                ? <Dropdown.Divider key={item.route}/>
-                                : <Dropdown.Item onClick={() => handleOnClick(item)} key={item.route}>{item.label}</Dropdown.Item>
+                                ? <Dropdown.Divider key={m}/>
+                                : <Dropdown.Item onClick={() => handleOnClick(item)} key={m}>{item.label}</Dropdown.Item>
                         )}
                     </Dropdown.Menu>
                 </Dropdown>

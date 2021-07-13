@@ -9,10 +9,11 @@ type Props = {
     label: string,
     buttonLabel?: string,
     buttonIcon?: React.Node,
-    onButtonClick?: () => void
+    onButtonClick?: () => void,
+    rightElement?: React.Node
 }
 
-export default function SectionWithAction({ className = '', label, buttonLabel, buttonIcon, onButtonClick }: Props): React$Element<any> {
+export default function SectionWithAction({ className = '', label, buttonLabel, buttonIcon, onButtonClick, rightElement }: Props): React$Element<any> {
     return (
         <div className={`section-with-action ${className}`} >
             <Typography variant='size-16' weight='semi-bold' className='ml-2'>
@@ -28,6 +29,8 @@ export default function SectionWithAction({ className = '', label, buttonLabel, 
                     size='sm' />
                 : null
             }
+
+            {rightElement}
         </div>
     );
 }

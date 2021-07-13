@@ -3,30 +3,38 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import Login from './LoginScreen';
-import Storage from '../../utils/Storage';
+import InfoMessage from '../../components/base/InfoMessage/InfoMessage';
+import CreateAccountScreen from './CreateAccountScreen';
 import { isValidEmail } from '../../utils/helpers';
 import { authUser } from '../../redux/modules/authentication';
 import { setFlashNotification } from '../../redux/modules/flashNotification';
-import { login } from '../../api/auth';
-import { storageKey } from '../../config/constants';
+import { createUser } from '../../api/users';
+import { setModalContent } from '../../redux/modules/modalEvent';
 
-export default function LoginContainer(): React$Element<any> {
+export default function CreateAccountContainer(): React$Element<any> {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const [isProcessing, setIsProcessing] = useState(false);
 
-    const onSubmit = async (formInput) => {
+    const goToLogin = () => {
+        history.push('/login');
+    };
+
+    const onSubmit = async (data: Object) => {
         setIsProcessing(true);
 
         try {
-            const { data } = await login(formInput);
+            await createUser({ ...data });
 
-            Storage.setItem(storageKey.accessToken, data.token);
-            dispatch(authUser(data));
             setIsProcessing(false);
-            history.replace('/dashboard');
+
+            dispatch(setModalContent({
+                modalContent: <InfoMessage
+                    infoType='success'
+                    message='Successfully create an account. You can now proceed to login.'
+                    onConfirm={goToLogin} />
+            }));
         } catch (err) {
             const { data } = err.response;
 
@@ -39,7 +47,7 @@ export default function LoginContainer(): React$Element<any> {
         }
     };
 
-    return <Login
+    return <CreateAccountScreen
         onSubmit={onSubmit}
         isProcessing={isProcessing} />;
 }
