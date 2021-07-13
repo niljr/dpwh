@@ -9,6 +9,7 @@ import PotentialVO from '../containers/PotentialVO/PotentialVOContainer';
 import ConstructionSchedule from '../containers/ConstructionSchedule/ConstructionScheduleContainer';
 import ConstructionScheduleApproved from '../containers/ConstructionScheduleApproved/ConstructionScheduleApprovedContainer';
 import ConstructionScheduleRevised from '../containers/ConstructionScheduleRevised/ConstructionScheduleRevisedContainer';
+import CreateAccount from '../containers/CreateAccount/CreateAccountContainer';
 // ROUTE IMPORT CODE GENERATOR INDICATOR DO NOT DELETE
 
 const routes = [{
@@ -54,6 +55,10 @@ const routes = [{
         name: 'PotentialVO',
         component: PotentialVO
     }]
+}, {
+    path: '/create-account',
+    name: CreateAccount,
+    component: CreateAccount
 }, // ROUTE ENTRY CODE GENERATOR INDICATOR DO NOT DELETE
 {
     path: '*',

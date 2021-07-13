@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import TimeExtensionScreen from './TimeExtensionScreen';
+import AddTimeExtension from '../../components/modules/AddTimeExtension/AddTimeExtension';
 import { setModalContent } from '../../redux/modules/modalEvent';
 import dummyData from './dummy.json';
 import { capitalize } from '../../utils/helpers';
@@ -25,8 +26,9 @@ export default function TimeExtensionContainer(): React$Element<any> {
 
     const handleToggleForm = (actionType: 'edit' | 'add', data) => {
         dispatch(setModalContent({
-            modalContent: <div>hello</div>,
-            title: `${capitalize(actionType)} Time Extension`
+            modalContent: <AddTimeExtension />,
+            title: `${capitalize(actionType)} Time Extension`,
+            size: 'lg'
         }));
     };
 

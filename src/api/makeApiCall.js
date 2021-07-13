@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { config, grantType } from 'config/constants';
-import { store } from 'redux/store';
+import { config } from '../config/constants';
+// import { store } from 'redux/store';
 
 export const api = axios.create({
     baseURL: config.apiUrl,
@@ -30,43 +30,43 @@ export function serialize(data: Object) {
  * @returns {Promise}
  */
 export default async function makeApiRequest(endpoint: string, method: string, data: Object | string = null, contentType: string) {
-    const { userToken } = store.getState().authentication;
+    // const { userToken } = store.getState().authentication;
     const request = {
         method,
         url: endpoint,
         data: data ? endpoint.includes('oauth') ? serialize(data) : data : ''
     };
 
-    if (endpoint.includes('oauth')) {
-        request.headers = {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: `Basic ${data.grant_type === grantType.CLIENT_CREDENTIALS
-                ? config.clientCredentialInternal
-                : config.clientCredentialMobile}`
-        };
-    } else {
-        request.headers = {
-            Authorization: `Bearer ${userToken.access_token}`
-        };
+    // if (endpoint.includes('oauth')) {
+    //     request.headers = {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //         Authorization: `Basic ${data.grant_type === grantType.CLIENT_CREDENTIALS
+    //             ? config.clientCredentialInternal
+    //             : config.clientCredentialMobile}`
+    //     };
+    // } else {
+    //     request.headers = {
+    //         Authorization: `Bearer ${userToken.access_token}`
+    //     };
 
-        if (contentType) {
-            request.headers['Content-Type'] = contentType;
-        } else if (endpoint.includes('convert-to-pdf')) {
-            request.headers['Content-Type'] = 'application/json';
-            request.headers.Accept = 'application/pdf';
-            request.responseType = 'blob';
-        }
-    }
+    //     if (contentType) {
+    //         request.headers['Content-Type'] = contentType;
+    //     } else if (endpoint.includes('convert-to-pdf')) {
+    //         request.headers['Content-Type'] = 'application/json';
+    //         request.headers.Accept = 'application/pdf';
+    //         request.responseType = 'blob';
+    //     }
+    // }
 
     const response = await api(request);
 
     if (response.status === 200) {
         return response.data;
     } else {
-        const error = new Error(response.statusText);
+        // const error = new Error(response);
 
-        error.response = response;
-        throw error;
+        // error.response = response;
+        throw response;
     }
 }
 

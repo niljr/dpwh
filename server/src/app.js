@@ -2,6 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/dpwh', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
 
 require('dotenv').config();
 
@@ -20,8 +27,6 @@ app.get('/', (req, res) => {
     message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
   });
 });
-
-console.log('api', api)
 
 app.use('/api/v1', api);
 
