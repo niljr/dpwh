@@ -9,6 +9,7 @@ import { setFlashNotification } from '../../../redux/modules/flashNotification';
 import './add-task.scss';
 import { getAllEngineers } from '../../../api/users';
 import Typography from '../../base/Typography/Typography';
+import { clearModalContent } from '../../../redux/modules/modalEvent';
 
 type Props = {
     className?: string
@@ -42,6 +43,7 @@ export default function AddTask({ className = '' }: Props): React$Element<any> {
     const defaultValue = {
         projectEngineer: '',
         projectId: '',
+        contractId: 'random',
         contractorName: '',
         componentId: '',
         municipality: '',
@@ -78,7 +80,14 @@ export default function AddTask({ className = '' }: Props): React$Element<any> {
         console.log(formData);
 
         try {
-            const { data } = await addTask(formData);
+            const data = await addTask(formData);
+
+            dispatch(setFlashNotification({
+                message: 'Successfully Submitted!',
+                isError: false
+            }));
+
+            dispatch(clearModalContent());
         } catch (err) {
             const { data } = err.response;
 
