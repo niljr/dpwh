@@ -8,6 +8,7 @@ import DashboardScreen from './DashboardScreen';
 import { dummy } from './dummy';
 import Typography from '../../components/base/Typography/Typography';
 import { updateSearch } from '../../redux/modules/contract';
+import { getTasks } from '../../api/tasks';
 
 export default function DashboardContainer(): React$Element<any> {
     const dispatch = useDispatch();
@@ -25,10 +26,10 @@ export default function DashboardContainer(): React$Element<any> {
         { total: 0, label: 'accepted', buttonVariant: 'secondary' },
         { total: 0, label: 'terminated', buttonVariant: 'danger' }]);
     const tableHeader = [
-        { key: 'id', label: 'CONTACT ID' },
+        { key: 'contractId', label: 'CONTACT ID' },
         { key: 'description', label: 'Description' },
-        { key: 'contractor', label: 'CONTACTOR / LGU NAME' },
-        { key: 'date', label: 'EFFECTIVITIY / EXPIRY DATE' },
+        { key: 'contractorName', label: 'CONTACTOR / LGU NAME' },
+        { key: 'expiryDate', label: 'EFFECTIVITIY / EXPIRY DATE' },
         { key: 'accomplishment', label: '%ACCOMPLISHED / SPLIPPAGE' },
         { key: 'status', label: 'STATUS' }
     ];
@@ -40,8 +41,11 @@ export default function DashboardContainer(): React$Element<any> {
     const prepareData = async () => {
         try {
             // TODO: replace dummy
-            const preview = dummy.map(assignment => {
-                const filterIndex = filters.findIndex(f => f.label === assignment.status);
+
+            const data = await getTasks();
+
+            const preview = data.map(assignment => {
+                const filterIndex = filters.findIndex(f => f.label === assignment.status.toLowerCase());
 
                 filters[filterIndex].total += 1;
 
@@ -58,6 +62,8 @@ export default function DashboardContainer(): React$Element<any> {
             setFilters(filters);
             setAssignments(preview);
         } catch (err) {
+            console.error(err);
+
             dispatch(setFlashNotification({
                 message: 'Failed to load data.',
                 isError: true
@@ -69,7 +75,7 @@ export default function DashboardContainer(): React$Element<any> {
 
     const handleSelect = (id: string) => {
         dispatch(updateSearch({
-            searchIdType: 'contract_id',
+            searchIdType: 'contractId',
             searchId: id
         }));
         history.push('/contract-management');
