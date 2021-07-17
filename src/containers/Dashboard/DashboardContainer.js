@@ -51,8 +51,8 @@ export default function DashboardContainer(): React$Element<any> {
 
                 return {
                     ...assignment,
-                    idComponent: <Button onClick={() => handleSelect(assignment.id)} className='dashboard__data-id' variant='success'>
-                        <Typography variant='size-12' color='color-light' weight='semi-bold'>{assignment.id}</Typography>
+                    idComponent: <Button onClick={() => handleSelect(assignment.contractId)} className='dashboard__data-id' variant='success'>
+                        <Typography variant='size-12' color='color-light' weight='semi-bold'>{assignment.contractId}</Typography>
                     </Button>,
                     date: `${assignment.effectivityDate} -
                     ${assignment.expiryDate}`
@@ -91,8 +91,8 @@ export default function DashboardContainer(): React$Element<any> {
         if (searchValue) {
             const pattern = new RegExp(searchValue, 'i');
 
-            return assignments.filter(({ description, contractor, id }) =>
-                pattern.test(description) || pattern.test(contractor) || pattern.test(id)
+            return assignments.filter(({ description, contractor, contractId }) =>
+                pattern.test(description) || pattern.test(contractor) || pattern.test(contractId)
             );
         }
 
