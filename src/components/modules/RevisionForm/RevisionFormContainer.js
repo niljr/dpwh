@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import formStructure from './revisionForm';
+import formStructure from './RevisionForm';
 import Form from '../../base/Form/Form';
 
 type Props = {
