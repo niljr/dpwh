@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+// import { io } from 'socket.io-client';
 // import Spinner from 'react-bootstrap/Spinner';
 import routes from '../../config/routes';
 import AppLoadingContainer from '../AppLoading/AppLoadingContainer';
@@ -13,10 +14,18 @@ import Navbar from '../../components/base/Navbar/Navbar';
 import { clearModalContent } from '../../redux/modules/modalEvent';
 
 function App() {
+    // const socket = io(process.env.REACT_APP_SOCKET_IO);
+
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const { modalContent, onToggle, ...modalEvent } = useSelector(({ modalEvent }) => modalEvent);
     const { isAuthed } = useSelector(({ authentication }) => authentication);
+
+    useEffect(() => {
+        // socket.on('messageSent', (message) => {
+        //     console.log('message', message);
+        // });
+    }, []);
 
     const handleCloseModal = () => {
         dispatch(clearModalContent());

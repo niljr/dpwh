@@ -10,6 +10,7 @@ import './add-task.scss';
 import { getAllEngineers } from '../../../api/users';
 import Typography from '../../base/Typography/Typography';
 import { clearModalContent } from '../../../redux/modules/modalEvent';
+import AppEventEmitter, { AppEvent } from '../../../utils/AppEvents';
 
 type Props = {
     className?: string
@@ -77,22 +78,24 @@ export default function AddTask({ className = '' }: Props): React$Element<any> {
     };
 
     const onSubmitForm = async (formData) => {
-        console.log(formData);
+        setIsProcessing(true);
 
         try {
             const data = await addTask(formData);
 
+            AppEventEmitter.emit(AppEvent.AddTask, data);
             dispatch(setFlashNotification({
                 message: 'Successfully Submitted!',
                 isError: false
             }));
 
+            setIsProcessing(false);
             dispatch(clearModalContent());
         } catch (err) {
             const { data } = err.response;
 
             dispatch(setFlashNotification({
-                message: data.message,
+                message: data ? data.message : 'Failed to add task',
                 isError: true
             }));
 

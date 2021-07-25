@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form as BootstrapForm, InputGroup, Col } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
@@ -34,16 +34,14 @@ type Props = {
     closeLabel?: string
 }
 
-export default function Form({
+const Form = memo(({
     className = '', data, structure, onSubmitForm, schema, isShowLabels = true, formSize = 'sm', submitLabel = 'Submit',
     isProcessing, withCloseButton, closeLabel = 'Close', iconSubmit, iconClose
-}: Props): React$Element<any> {
+}: Props): React$Element<any> => {
     const dispatch = useDispatch();
     const { register, control, formState: { errors }, handleSubmit } = useForm({
         resolver: yupResolver(schema)
     });
-
-    console.log(isProcessing, errors);
 
     const onSubmit = (data: Object) => {
         onSubmitForm(data);
@@ -54,8 +52,6 @@ export default function Form({
     };
 
     const renderControl = (control: any) => {
-        console.log(control.formControl);
-
         // CHECKBOX && RADIO
         if (/checkbox|radio|switch/.test(control.formControl)) {
             return (
@@ -166,4 +162,6 @@ export default function Form({
             </div>
         </form>
     );
-}
+});
+
+export default Form;

@@ -6,6 +6,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import configureStore, { history } from './redux/store';
 import App from './containers/App/AppContainer';
 import reportWebVitals from './utils/reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorker/serviceWorkerRegistration';
+import { subscribeUser } from './serviceWorker/subscription';
 import './styles/styles.scss';
 
 const store = configureStore();
@@ -21,6 +23,8 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+serviceWorkerRegistration.register();
+subscribeUser();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

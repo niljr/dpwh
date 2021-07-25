@@ -5,10 +5,10 @@ import { useHistory } from 'react-router';
 import { setFlashNotification } from '../../redux/modules/flashNotification';
 import Button from '../../components/base/Button/Button';
 import DashboardScreen from './DashboardScreen';
-import { dummy } from './dummy';
 import Typography from '../../components/base/Typography/Typography';
 import { updateSearch } from '../../redux/modules/contract';
 import { getTasks } from '../../api/tasks';
+import AppEventEmitter, { AppEvent } from '../../utils/AppEvents';
 
 export default function DashboardContainer(): React$Element<any> {
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export default function DashboardContainer(): React$Element<any> {
         { total: 0, label: 'accepted', buttonVariant: 'secondary' },
         { total: 0, label: 'terminated', buttonVariant: 'danger' }]);
     const tableHeader = [
-        { key: 'contractId', label: 'CONTACT ID' },
+        { key: 'contractId', label: 'CONTRACT ID' },
         { key: 'description', label: 'Description' },
         { key: 'contractorName', label: 'CONTACTOR / LGU NAME' },
         { key: 'expiryDate', label: 'EFFECTIVITIY / EXPIRY DATE' },
@@ -36,42 +36,61 @@ export default function DashboardContainer(): React$Element<any> {
 
     useEffect(() => {
         prepareData();
+        const addTaskListener = AppEventEmitter.addListener(AppEvent.AddTask, handleAddedTask);
+
+        return () => {
+            addTaskListener.remove();
+        };
     }, []);
+
+    const handleAddedTask = (newTask) => {
+        const updatedFilters = updateFilter(newTask.status, filters);
+
+        setFilters(updatedFilters);
+        setAssignments((prev) => ([
+            ...prev,
+            addDataComponent(newTask)
+        ]));
+    };
 
     const prepareData = async () => {
         try {
-            // TODO: replace dummy
-
             const data = await getTasks();
-
+            let updatedFilters = [...filters];
             const preview = data.map(assignment => {
-                const filterIndex = filters.findIndex(f => f.label === assignment.status.toLowerCase());
+                updatedFilters = updateFilter(assignment.status, updatedFilters);
 
-                filters[filterIndex].total += 1;
-
-                return {
-                    ...assignment,
-                    idComponent: <Button onClick={() => handleSelect(assignment.contractId)} className='dashboard__data-id' variant='success'>
-                        <Typography variant='size-12' color='color-light' weight='semi-bold'>{assignment.contractId}</Typography>
-                    </Button>,
-                    date: `${assignment.effectivityDate} -
-                    ${assignment.expiryDate}`
-                };
+                return addDataComponent(assignment);
             });
 
             setFilters(filters);
             setAssignments(preview);
+            setIsLoading(false);
         } catch (err) {
-            console.error(err);
-
             dispatch(setFlashNotification({
                 message: 'Failed to load data.',
                 isError: true
             }));
-        } finally {
             setIsLoading(false);
         }
     };
+
+    const updateFilter = (status, updatedFilters) => {
+        const filterIndex = updatedFilters.findIndex(f => f.label === status.toLowerCase());
+
+        updatedFilters[filterIndex].total += 1;
+
+        return updatedFilters;
+    };
+
+    const addDataComponent = (task) => ({
+        ...task,
+        contractIdComponent: <Button onClick={() => handleSelect(task.contractId)} className='dashboard__data-id' variant='success'>
+            <Typography variant='size-12' color='color-light' weight='semi-bold'>{task.contractId}</Typography>
+        </Button>,
+        date: `${task.effectivityDate} -
+        ${task.expiryDate}`
+    });
 
     const handleSelect = (id: string) => {
         dispatch(updateSearch({
@@ -83,7 +102,7 @@ export default function DashboardContainer(): React$Element<any> {
 
     const getFilteredAssignments = () => {
         return assignments.filter(({ status }) => {
-            return selectedFilter === 'all' || status === selectedFilter;
+            return selectedFilter === 'all' || status.toLowerCase() === selectedFilter;
         });
     };
 
