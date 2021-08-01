@@ -38,8 +38,6 @@ export default function ContractInformation({ className = '' }: Props): React$El
         }
     }, [currentContract]);
 
-    console.log({ currentContract });
-
     return (
         !currentContract
             ? <div />

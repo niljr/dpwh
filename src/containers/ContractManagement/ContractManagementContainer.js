@@ -6,6 +6,7 @@ import { FaLightbulb, FaClock, FaSnowplow } from 'react-icons/fa';
 import { setCurrentContract } from '../../redux/modules/contract';
 import { getTaskByContractId } from '../../api/tasks';
 import ManagementScreen from './ContractManagementScreen';
+import { setFlashNotification } from '../../redux/modules/flashNotification';
 
 type Props = {
     routes: Array<any>
@@ -29,7 +30,7 @@ const tabItems = [
 export default function ManagementContainer({ routes }: Props): React$Element<any> {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
-    const { searchIdType, searchId } = useSelector(({ contract }) => contract);
+    const { searchId } = useSelector(({ contract }) => contract);
 
     useEffect(() => {
         if (searchId) {
@@ -42,9 +43,11 @@ export default function ManagementContainer({ routes }: Props): React$Element<an
             const task = await getTaskByContractId(searchId);
 
             dispatch(setCurrentContract(task));
-            console.log(task);
         } catch (error) {
-            console.log('FETCH contract error', error);
+            dispatch(setFlashNotification({
+                message: 'Failed to retreive contract details',
+                isError: true
+            }));
         }
     };
 
