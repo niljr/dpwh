@@ -7,7 +7,7 @@ import Button from '../../components/base/Button/Button';
 import DashboardScreen from './DashboardScreen';
 import Typography from '../../components/base/Typography/Typography';
 import { updateSearch } from '../../redux/modules/contract';
-import { getTasks } from '../../api/tasks';
+import { getAllTasks } from '../../api/tasks';
 import AppEventEmitter, { AppEvent } from '../../utils/AppEvents';
 
 export default function DashboardContainer(): React$Element<any> {
@@ -55,7 +55,7 @@ export default function DashboardContainer(): React$Element<any> {
 
     const prepareData = async () => {
         try {
-            const data = await getTasks();
+            const data = await getAllTasks();
             let updatedFilters = [...filters];
             const preview = data.map(assignment => {
                 updatedFilters = updateFilter(assignment.status, updatedFilters);

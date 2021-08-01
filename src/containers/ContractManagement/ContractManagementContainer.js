@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaLightbulb, FaClock, FaSnowplow } from 'react-icons/fa';
 import { setCurrentContract } from '../../redux/modules/contract';
+import { getTaskByContractId } from '../../api/tasks';
 import ManagementScreen from './ContractManagementScreen';
 
 type Props = {
@@ -31,29 +32,19 @@ export default function ManagementContainer({ routes }: Props): React$Element<an
     const { searchIdType, searchId } = useSelector(({ contract }) => contract);
 
     useEffect(() => {
-        retrieveContractInformation();
-    }, []);
+        if (searchId) {
+            retrieveContractInformation();
+        }
+    }, [searchId]);
 
-    const retrieveContractInformation = () => {
+    const retrieveContractInformation = async () => {
         try {
-            // TODO call api to get contract info
+            const task = await getTaskByContractId(searchId);
 
-            setTimeout(() => {
-                dispatch(setCurrentContract({
-                    id: '15CH6730',
-                    contractor: 'AQUASSEUR',
-                    contractName: 'Consequat enim ut mollit culpa consequat magna consectetur do fugiat nisi excepteur elit enim veniam.',
-                    description: 'Irure eu duis eu eu in duis sunt. Labore aliquip reprehenderit culpa mollit velit.',
-                    effectivityDate: '04/10/2015',
-                    expiryDate: '11/14/2017',
-                    status: 'ongoing',
-                    accomplishment: 35,
-                    duration: 45,
-                    cost: '489,997.70'
-                }));
-            }, 1000);
+            dispatch(setCurrentContract(task));
+            console.log(task);
         } catch (error) {
-            // TODO add logger
+            console.log('FETCH contract error', error);
         }
     };
 

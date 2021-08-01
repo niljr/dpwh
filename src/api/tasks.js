@@ -16,6 +16,15 @@ export const addTask = async (data:Object) => {
  * Get All tasks
  * @returns {Promise}
  */
-export const getTasks = async () => {
+export const getAllTasks = async () => {
     return await makeApiRequest(TASK_ENDPOINT, 'GET');
+};
+
+/**
+ * Get task by contractId
+ * @param {String} id
+ * @returns {Promise}
+ */
+export const getTaskByContractId = async (id) => {
+    return await makeApiRequest(`${TASK_ENDPOINT}contractId/${id}`, 'GET');
 };
