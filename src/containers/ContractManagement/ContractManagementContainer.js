@@ -1,6 +1,6 @@
 // @flow
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaLightbulb, FaClock, FaSnowplow } from 'react-icons/fa';
 import { setCurrentContract } from '../../redux/modules/contract';
@@ -29,12 +29,15 @@ const tabItems = [
 
 export default function ManagementContainer({ routes }: Props): React$Element<any> {
     const { pathname } = useLocation();
+    const history = useHistory();
     const dispatch = useDispatch();
     const { searchId } = useSelector(({ contract }) => contract);
 
     useEffect(() => {
         if (searchId) {
             retrieveContractInformation();
+        } else {
+            history.push('/contract-management');
         }
     }, [searchId]);
 
@@ -48,6 +51,7 @@ export default function ManagementContainer({ routes }: Props): React$Element<an
                 message: 'Failed to retreive contract details',
                 isError: true
             }));
+            history.push('/contract-management');
         }
     };
 

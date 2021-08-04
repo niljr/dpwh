@@ -58,6 +58,7 @@ export default function SearchContract({
                 <InputGroup size='sm' hasValidation={true}>
                     <FormControl
                         name='searchId'
+                        id='searchId'
                         defaultValue={searchId}
                         placeholder='Enter ID'
                         isInvalid={searchError !== null} />

@@ -9,9 +9,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 import WrapperBackground from '../../components/base/WrapperBackground/WrapperBackground';
 import Typography from '../../components/base/Typography/Typography';
 import Storage from '../../utils/Storage';
-import { isTokenValid } from '../../utils/Auth';
 import { storageKey } from '../../config/constants';
-import { updateUserToken, authUser } from '../../redux/modules/authentication';
+import { authUser } from '../../redux/modules/authentication';
 import { getUser } from '../../api/users';
 import './app-loading.scss';
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import SuspensionResumptionScreen from './SuspensionResumptionScreen';
 import { setModalContent } from '../../redux/modules/modalEvent';
-import AddSuspensionOrderContainer from '../../components/modules/AddSuspensionOrder/AddSuspensionOrderContainer';
+import AddSuspensionOrder from '../../components/modules/AddSuspensionOrder/AddSuspensionOrder';
 import dummyData from './dummy.json';
 
 export default function SuspensionResumptionContainer(): React$Element<any> {
@@ -24,7 +24,7 @@ export default function SuspensionResumptionContainer(): React$Element<any> {
 
     const handleOnClick = () => {
         dispatch(setModalContent({
-            modalContent: <AddSuspensionOrderContainer />,
+            modalContent: <AddSuspensionOrder />,
             title: 'Suspension Details',
             size: 'lg'
         }));

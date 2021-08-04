@@ -18,7 +18,7 @@ export default function ContractInformation({ className = '' }: Props): React$El
 
     const prepareData = () => {
         setData({
-            id: { label: 'Contract ID', value: currentContract.id },
+            id: { label: 'Contract ID', value: currentContract.contractId },
             contractName: { label: 'Contract Name', value: currentContract.contractName.toUpperCase() },
             contractorName: { label: 'Contractor Name', value: currentContract.contractorName.toUpperCase() },
             effectivityDate: { label: 'Contract Effectivity Date', value: moment(currentContract.effectivityDate).format('L') },

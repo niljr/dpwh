@@ -20,9 +20,13 @@ export default function TableDetails({ className = '', headers, list }: Props): 
                 responsive='xl'>
                 <thead>
                     <tr>
-                        {headers.map((label, i) =>
+                        {headers.map((header, i) =>
                             <th className='table__header' key={i}>
-                                <Typography color='color-light' weight='semi-bold'>{camelToReadableText(label)}</Typography>
+                                <Typography color='color-light' weight='semi-bold'>
+                                    {typeof header === 'object'
+                                        ? header.label
+                                        : camelToReadableText(header)
+                                    }</Typography>
                             </th>
                         )}
                     </tr>
@@ -31,9 +35,11 @@ export default function TableDetails({ className = '', headers, list }: Props): 
                     {list.length
                         ? list.map((item, i) =>
                             <tr key={i} className='table__data-row'>
-                                {headers.map((key) =>
-                                    <td className='table__data' key={key}>
-                                        {item[key]}
+                                {headers.map((headerKey, h) =>
+                                    <td className='table__data' key={h}>
+                                        {typeof headerKey === 'object'
+                                            ? item[headerKey.key]
+                                            : item[headerKey]}
                                     </td>
                                 )}
                             </tr>

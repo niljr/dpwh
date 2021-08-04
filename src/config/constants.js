@@ -5,6 +5,7 @@ export const config = {
     users: 'users/',
     authenticate: 'authenticate/',
     tasks: 'tasks/',
+    revisions: 'revisions/',
     clientCredentialInternal: process.env.REACT_APP_CLIENT_CREDENTIALS_INTERNAL
 };
 
