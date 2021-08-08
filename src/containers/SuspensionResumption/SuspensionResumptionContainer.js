@@ -1,10 +1,13 @@
 // @flow
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { FaRegEdit } from 'react-icons/fa';
+import Button from '../../components/base/Button/Button';
 import SuspensionResumptionScreen from './SuspensionResumptionScreen';
 import { setModalContent } from '../../redux/modules/modalEvent';
-import AddSuspensionOrder from '../../components/modules/AddSuspensionOrder/AddSuspensionOrder';
-import dummyData from './dummy.json';
+import { getAllSuspensions } from '../../api/suspensions';
+import { setFlashNotification } from '../../redux/modules/flashNotification';
+import SuspensionOrderForm from '../../components/modules/SuspensionOrderForm/SuspensionOrderForm';
 
 export default function SuspensionResumptionContainer(): React$Element<any> {
     const dispatch = useDispatch();
@@ -12,19 +15,47 @@ export default function SuspensionResumptionContainer(): React$Element<any> {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        prepareDate();
+        prepareData();
     }, []);
 
-    const prepareDate = () => {
-        setTimeout(() => {
-            setData(dummyData);
+    const prepareData = async () => {
+        try {
+            const data = await getAllSuspensions();
+
+            setData(data.map(item => ({
+                ...item,
+                edit: <Button variant='link' onClick={() => handleEdit(item)}>
+                    <FaRegEdit />
+                </Button>
+            })));
             setIsLoading(false);
-        }, 500);
+        } catch (error) {
+            dispatch(setFlashNotification({
+                message: 'Failed to retrieve suspensions',
+                isError: true
+            }));
+            setIsLoading(false);
+        }
     };
 
-    const handleOnClick = () => {
+    const handleUpdatedSuspension = (suspension, isUpdating) => {
+        if (isUpdating) {
+            prepareData();
+        } else {
+            setData([...data, suspension]);
+        }
+    };
+
+    const handleEdit = (item: any) => {
+        handleToggleSuspensionForm(item);
+    };
+
+    const handleToggleSuspensionForm = (item: any = {}) => {
         dispatch(setModalContent({
-            modalContent: <AddSuspensionOrder />,
+            modalContent: <SuspensionOrderForm
+                count={data.length}
+                handleUpdatedSuspension={handleUpdatedSuspension}
+                suspension={item} />,
             title: 'Suspension Details',
             size: 'lg'
         }));
@@ -33,5 +64,5 @@ export default function SuspensionResumptionContainer(): React$Element<any> {
     return <SuspensionResumptionScreen
         isLoading={isLoading}
         data={data}
-        handleOnClick={handleOnClick}/>;
+        handleOnClick={handleToggleSuspensionForm}/>;
 }

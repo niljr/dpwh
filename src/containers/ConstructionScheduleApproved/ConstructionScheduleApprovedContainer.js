@@ -29,7 +29,7 @@ export default function ConstructionScheduleApprovedContainer(): React$Element<a
             })));
         } catch (error) {
             dispatch(setFlashNotification({
-                message: 'Failed to retreive revisions',
+                message: 'Failed to retrieve revisions',
                 isError: true
             }));
         }

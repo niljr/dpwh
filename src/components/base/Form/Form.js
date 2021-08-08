@@ -65,7 +65,7 @@ const Form = memo(({
             );
         }
 
-        // INPUT, TEXTAREA, SELECT
+        // INPUT, TEXTAREA
         return (
             <BootstrapForm.Control
                 size={formSize}
@@ -74,16 +74,8 @@ const Form = memo(({
                 placeholder={control.placeholder}
                 readOnly={control.isReadOnly}
                 defaultValue={(data && data.hasOwnProperty(control.name)) ? data[control.name] : null}
-                {...register(control.name, control.validationConfig)}
                 isInvalid={(errors[control.name])}
-                custom={control.formControl === 'select'}>
-                {control.formControl === 'select'
-                    ? <>
-                        <option value=''>-- Select --</option>
-                        {control.options && control.options.map((option: any, o: number) => <option value={option.value} key={o}>{option.label}</option>)}
-                    </>
-                    : null}
-            </BootstrapForm.Control>
+                {...register(control.name, control.validationConfig)}/>
         );
     };
 
@@ -109,7 +101,9 @@ const Form = memo(({
                                                     className={`size-${formSize}${error ? ' is-invalid' : ''}`}
                                                     placeholderText={col.placeholder}
                                                     onChange={(date) => onChange(date)}
-                                                    selected={value} />
+                                                    selected={value}
+                                                    readOnly={col.isReadOnly}
+                                                    disabled={col.isReadOnly} />
                                                 : <Select
                                                     classNamePrefix='app-form__select'
                                                     className={`app-form__select size-${formSize}${error ? ' is-invalid' : ''}`}

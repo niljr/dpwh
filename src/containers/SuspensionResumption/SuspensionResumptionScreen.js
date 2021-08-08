@@ -1,15 +1,15 @@
 // @flow
 import React from 'react';
-import { FaPlus, FaArrowRight } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import SectionWithAction from '../../components/base/SectionWithAction/SectionWithAction';
 import TableDetails from '../../components/base/TableDetails/TableDetails';
-import Button from '../../components/base/Button/Button';
 import withLoading from '../../components/modules/withLoading/withLoading';
 
 import './suspension-resumption.scss';
 
 type Props = {
-    data: Array<any>
+    data: Array<any>,
+    handleOnClick: () => void
 }
 
 function SuspensionResumptionScreen({ data, handleOnClick }: Props): React$Element<any> {
@@ -25,8 +25,20 @@ function SuspensionResumptionScreen({ data, handleOnClick }: Props): React$Eleme
             <div className='suspension-resumption__content'>
                 <TableDetails
                     headers={[
-                        'suspensionOrderNo', 'extent', 'description', 'approvalLevel', 'approvedBy', 'designation',
-                        'reason', 'effectivityDate', 'dateApproved', 'cumulativeCD', 'status', 'continuance', 'resumption']}
+                        { key: 'orderNo', label: 'Suspension Order #' },
+                        { key: 'extent', label: 'Extent' },
+                        { key: 'description', label: 'Description' },
+                        { key: 'approvalLevel', label: 'Approval Level' },
+                        { key: 'approvedBy', label: 'Approved By' },
+                        { key: 'designation', label: 'Designation' },
+                        { key: 'reason', label: 'Reason' },
+                        { key: 'effectivityDate', label: 'Effectivity Date' },
+                        { key: 'dateApproved', label: 'Date Approved' },
+                        { key: 'cumulativeCD', label: 'Cumulative C.D.' },
+                        { key: 'status', label: 'Status' },
+                        { key: 'continuance', label: 'Continuance' },
+                        { key: 'resumption', label: 'Resumption' },
+                        { key: 'edit', label: 'Edit' }]}
                     list={data}
                     className='pb-3'/>
             </div>

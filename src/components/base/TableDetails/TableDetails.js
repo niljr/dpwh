@@ -37,9 +37,11 @@ export default function TableDetails({ className = '', headers, list }: Props): 
                             <tr key={i} className='table__data-row'>
                                 {headers.map((headerKey, h) =>
                                     <td className='table__data' key={h}>
-                                        {typeof headerKey === 'object'
-                                            ? item[headerKey.key]
-                                            : item[headerKey]}
+                                        <Typography>
+                                            {typeof headerKey === 'object'
+                                                ? item[headerKey.key]
+                                                : item[headerKey]}
+                                        </Typography>
                                     </td>
                                 )}
                             </tr>

@@ -1,7 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import * as yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import formStructure from './RevisionForm';
 import Form from '../../base/Form/Form';
 import { addRevision, updateRevision } from '../../../api/revisions';
@@ -21,6 +21,7 @@ const schema = yup.object().shape({
 
 export default function RevisionFormContainer({ className = '', count, handleUpdatedRevision, revision = {} }: Props): React$Element<any> {
     const dispatch = useDispatch();
+    const { currentContract } = useSelector(({ contract }) => contract);
     const defaultValue = {
         revisionNumber: zeroPadded(count + 1, 2),
         dateEntry: new Date(),
@@ -32,8 +33,11 @@ export default function RevisionFormContainer({ className = '', count, handleUpd
         try {
             setIsProcessing(true);
 
-            const func = revision ? updateRevision : addRevision;
-            const newRevision = await func(data, revision ? revision._id : null);
+            const func = Object.keys(revision).length ? updateRevision : addRevision;
+            const newRevision = await func({
+                ...data,
+                taskId: currentContract._id
+            }, revision ? revision._id : null);
 
             handleUpdatedRevision(newRevision, !!revision);
             setIsProcessing(false);
