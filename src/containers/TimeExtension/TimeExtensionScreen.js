@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FaPrint, FaPlus } from 'react-icons/fa';
+import { FaPlus } from 'react-icons/fa';
 import SectionWithAction from '../../components/base/SectionWithAction/SectionWithAction';
 import Button from '../../components/base/Button/Button';
 import TableDetails from '../../components/base/TableDetails/TableDetails';
@@ -19,12 +19,12 @@ function TimeExtensionScreen({ data, handleToggleForm }: Props): React$Element<a
                 label='Time Extension List'
                 className='mt-2'
                 rightElement={<div>
-                    <Button
+                    {/* <Button
                         variant='outline-light'
                         label='Print Time Variance'
                         icon={FaPrint}
                         onClick={() => handleToggleForm('add')}
-                        size='sm' />
+                        size='sm' /> */}
                     <Button
                         variant='outline-light'
                         label='Add Time Extension'

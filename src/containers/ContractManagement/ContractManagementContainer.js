@@ -23,8 +23,8 @@ const tabItems = [
             { label: 'Suspension/Resumption', route: '/contract-management/time-variance/suspension_resumption' },
             { label: 'Time Extension', route: '/contract-management/time-variance/time-extension' }
         ]
-    },
-    { label: 'Potential VO', key: 'potential-vo', icon: FaLightbulb, route: '/contract-management/potential-vo', subMenu: null }
+    }
+    // { label: 'Potential VO', key: 'potential-vo', icon: FaLightbulb, route: '/contract-management/potential-vo', subMenu: null }
 ];
 
 export default function ManagementContainer({ routes }: Props): React$Element<any> {

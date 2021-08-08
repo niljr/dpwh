@@ -1,41 +1,38 @@
 // @flow
 import React from 'react';
-import { Switch } from 'react-router-dom';
-import { RouteWithSubRoutes } from '../App/AppContainer';
-import Tabs from '../../components/base/Tabs/Tabs';
+import { FaPlus } from 'react-icons/fa';
+import TableDetails from '../../components/base/TableDetails/TableDetails';
 import SectionWithAction from '../../components/base/SectionWithAction/SectionWithAction';
-import withLoading from '../../components/modules/withLoading/withLoading';
 import './construction-schedule.scss';
 
 type Props = {
-    routes: Array<Object>
+    handleToggleRevisionForm: () => void,
+    revisions: Array<any>
 }
 
-const tabItems = [
-    { label: 'Approved Construction Schedule', key: 'approved', route: '/contract-management/construction-schedule/approved' },
-    { label: 'Revised Construction Schedule', key: 'revised', route: '/contract-management/construction-schedule/revised' }
-];
-
-function ConstructionScheduleScreen({ routes }: Props): React$Element<any> {
+export default function ConstructionScheduleScreen({ handleToggleRevisionForm, revisions }: Props): React$Element<any> {
     return (
         <div className='construction-schedule'>
-            <SectionWithAction label='Construction Schedule' className='mt-2'/>
+            <SectionWithAction
+                label='Revisions'
+                className='mt-2'
+                onButtonClick={() => handleToggleRevisionForm()}
+                buttonLabel='ADD REVISION'
+                buttonIcon={FaPlus} />
 
-            <div className='m-3'>
-                <Tabs items={tabItems} />
-
-                <div className='construction-schedule__content'>
-                    <Switch>
-                        {routes.map((route, i) =>
-                            <RouteWithSubRoutes key={i} {...route} />
-                        )}
-                    </Switch>
-                </div>
+            <div className='construction-schedule__content'>
+                <TableDetails
+                    headers={[
+                        { key: 'revisionNumber', label: 'Revision #' },
+                        { key: 'dateEntry', label: 'Date of Entry' },
+                        { key: 'dateApproved', label: 'Date Approved' },
+                        { key: 'reasonForRevision', label: 'Reason' },
+                        { key: 'status', label: 'Status' },
+                        { key: 'edit', label: 'Edit' }
+                    ]}
+                    list={revisions}
+                    className='pb-3'/>
             </div>
         </div>
     );
 }
-
-const ConstructionSchedule: any = withLoading(ConstructionScheduleScreen);
-
-export default ConstructionSchedule;
