@@ -45,8 +45,6 @@ export default function AppNavbar({ className = '' }: Props): React$Element<any>
             component: AddTask,
             isDivider: false
         });
-
-        console.log(menu);
     }
 
     const history = useHistory();

@@ -24,14 +24,14 @@ export default function LoginContainer(): React$Element<any> {
             const { data } = await login(formInput);
 
             Storage.setItem(storageKey.accessToken, data.token);
-            dispatch(authUser(data));
             setIsProcessing(false);
-            history.replace('/dashboard');
+            dispatch(authUser(data));
         } catch (err) {
-            const { data } = err.response;
+            const response = err.response;
 
+            console.log(response, err);
             dispatch(setFlashNotification({
-                message: data.message,
+                message: (response && response.hasOwnProperty('data')) ? response.data.message : 'Failed to login',
                 isError: true
             }));
 

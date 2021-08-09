@@ -3,5 +3,8 @@
 @import '../../styles/utils/_mixins';
 
 .construction-schedule-approved {
-
+    &__content {
+        overflow: scroll;
+        height: calc(100vh - 145px);
+    }
 }

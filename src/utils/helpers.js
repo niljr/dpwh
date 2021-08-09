@@ -58,3 +58,5 @@ export function allCapsToReadableText(string: string): string {
 export const isValidEmail = (str: string): boolean => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(str);
 
 export const toReadableDate = (date: string): string => moment(new Date(date)).format('MM/DD/YYYY');
+
+export const zeroPadded = (count: number, length: number = 4): string => count.toString().padStart(length, '0');

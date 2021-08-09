@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form as BootstrapForm, InputGroup, Col } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
@@ -34,16 +34,14 @@ type Props = {
     closeLabel?: string
 }
 
-export default function Form({
+const Form = memo(({
     className = '', data, structure, onSubmitForm, schema, isShowLabels = true, formSize = 'sm', submitLabel = 'Submit',
     isProcessing, withCloseButton, closeLabel = 'Close', iconSubmit, iconClose
-}: Props): React$Element<any> {
+}: Props): React$Element<any> => {
     const dispatch = useDispatch();
     const { register, control, formState: { errors }, handleSubmit } = useForm({
         resolver: yupResolver(schema)
     });
-
-    console.log(isProcessing, errors);
 
     const onSubmit = (data: Object) => {
         onSubmitForm(data);
@@ -54,8 +52,6 @@ export default function Form({
     };
 
     const renderControl = (control: any) => {
-        console.log(control.formControl);
-
         // CHECKBOX && RADIO
         if (/checkbox|radio|switch/.test(control.formControl)) {
             return (
@@ -69,7 +65,7 @@ export default function Form({
             );
         }
 
-        // INPUT, TEXTAREA, SELECT
+        // INPUT, TEXTAREA
         return (
             <BootstrapForm.Control
                 size={formSize}
@@ -78,16 +74,8 @@ export default function Form({
                 placeholder={control.placeholder}
                 readOnly={control.isReadOnly}
                 defaultValue={(data && data.hasOwnProperty(control.name)) ? data[control.name] : null}
-                {...register(control.name, control.validationConfig)}
                 isInvalid={(errors[control.name])}
-                custom={control.formControl === 'select'}>
-                {control.formControl === 'select'
-                    ? <>
-                        <option value=''>-- Select --</option>
-                        {control.options && control.options.map((option: any, o: number) => <option value={option.value} key={o}>{option.label}</option>)}
-                    </>
-                    : null}
-            </BootstrapForm.Control>
+                {...register(control.name, control.validationConfig)}/>
         );
     };
 
@@ -113,7 +101,9 @@ export default function Form({
                                                     className={`size-${formSize}${error ? ' is-invalid' : ''}`}
                                                     placeholderText={col.placeholder}
                                                     onChange={(date) => onChange(date)}
-                                                    selected={value} />
+                                                    selected={value}
+                                                    readOnly={col.isReadOnly}
+                                                    disabled={col.isReadOnly} />
                                                 : <Select
                                                     classNamePrefix='app-form__select'
                                                     className={`app-form__select size-${formSize}${error ? ' is-invalid' : ''}`}
@@ -166,4 +156,6 @@ export default function Form({
             </div>
         </form>
     );
-}
+});
+
+export default Form;

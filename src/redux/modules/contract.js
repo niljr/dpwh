@@ -2,7 +2,7 @@
 const UPDATE_SEARCH = 'UPDATE_SEARCH';
 const SET_CURRENT_CONTRACT = 'SET_CURRENT_CONTRACT';
 
-export function updateSearch(search: Object): any {
+export function updateSearch(search: { searchIdType: string, searchId: string }): any {
     return {
         type: UPDATE_SEARCH,
         search

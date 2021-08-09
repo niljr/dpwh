@@ -15,3 +15,7 @@ export const createUser = async (data:Object) => {
 export const getAllEngineers = async () => {
     return await makeApiRequest(`${USER_ENDPOINT}getAllEngineers`);
 };
+
+export const getUser = async (id: string) => {
+    return await makeApiRequest(`${USER_ENDPOINT}${id}`);
+}
