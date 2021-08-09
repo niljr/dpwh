@@ -1,0 +1,13 @@
+
+@import '../../styles/utils/_variables';
+@import '../../styles/utils/_mixins';
+
+.potential-vo {
+    margin-bottom: 20px;
+
+    &__content {
+        margin: 0 1rem;
+        overflow: scroll;
+        height: calc(100vh - 145px);
+    }
+}

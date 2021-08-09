@@ -1,0 +1,24 @@
+
+@import '../../styles/utils/_variables';
+@import '../../styles/utils/_mixins';
+
+.create-account {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__wrapper {
+        width: 435px;
+        padding: $spacing;
+    }
+
+    &__form {
+        width: 100%;
+
+        .form-row {
+            margin-bottom: $spacing-half;
+        }
+    }
+}

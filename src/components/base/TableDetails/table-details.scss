@@ -1,0 +1,17 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.table-details {
+    .table {
+        &__header {
+            border-top: 0;
+            background-color: $color-brand-darkBlue;
+            
+            p {
+                white-space: pre;
+                text-align: center;
+            }
+        }
+    }
+}

@@ -4,49 +4,42 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Login from './LoginScreen';
+import Storage from '../../utils/Storage';
 import { isValidEmail } from '../../utils/helpers';
 import { authUser } from '../../redux/modules/authentication';
 import { setFlashNotification } from '../../redux/modules/flashNotification';
+import { login } from '../../api/auth';
+import { storageKey } from '../../config/constants';
 
 export default function LoginContainer(): React$Element<any> {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [loginForm, setLoginForm] = useState({
-        email: '',
-        password: ''
-    });
+    const [isProcessing, setIsProcessing] = useState(false);
 
-    const onSubmit = e => {
-        e.preventDefault();
+    const onSubmit = async (formInput) => {
+        setIsProcessing(true);
 
         try {
-            if (isValidEmail(loginForm.email) && loginForm.password) {
-                // TODO:
-                // call api to authenticate user and redirect to dashboard
+            const { data } = await login(formInput);
 
-                dispatch(authUser({
-                    // TODO set user data
-                }));
-
-                history.replace('/dashboard');
-            }
+            Storage.setItem(storageKey.accessToken, data.token);
+            dispatch(authUser(data));
+            setIsProcessing(false);
+            history.replace('/dashboard');
         } catch (err) {
+            const { data } = err.response;
+
             dispatch(setFlashNotification({
-                message: 'ERROR',
+                message: data.message,
                 isError: true
             }));
+
+            setIsProcessing(false);
         }
     };
 
-    const onChange = e => {
-        const { name, value } = e.target;
-
-        setLoginForm({
-            ...loginForm,
-            [name]: value
-        });
-    };
-
-    return <Login onSubmit={onSubmit} onChange={onChange}/>;
+    return <Login
+        onSubmit={onSubmit}
+        isProcessing={isProcessing} />;
 }

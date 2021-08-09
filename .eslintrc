@@ -5,6 +5,18 @@
         "react-app"
     ],
     "rules": {
+        "camelCase": [
+            0,
+            {
+                "properties": "always"
+            }
+        ],
+        "camelcase": [
+            0,
+            {
+                "properties": "always"
+            }
+        ],
         "no-prototype-builtins": 0,
         "no-console": [
             1,

@@ -1,0 +1,13 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.search-contract {
+    &__header {
+        text-align: center;
+    }
+    
+    &__content {
+        padding: 10px;
+    }
+}

@@ -1,0 +1,109 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.tabs {
+    display: flex;
+    margin-top: 8px;
+    border-bottom: 1px solid $color-brand-darkBlue;
+
+    &__item {
+        background-color: $color-background;
+        cursor: pointer;
+        margin-left: 3px;
+        padding: 5px 10px;
+        border-top-left-radius: $border-radius-medium;
+        border-top-right-radius: $border-radius-medium;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        // border: 1px solid $color-brand-lightGray;
+
+        &:hover {
+            background-color: lighten($color-brand-darkBlue, 10%);
+
+            .tabs__item-label {
+                color: $color-background;
+            }
+        }
+
+        &.active {
+            background-color: $color-brand-darkBlue;
+
+            .tabs__item-label {
+                color: $color-background;
+            }
+        }
+
+        &-label {
+            white-space: pre;
+            text-align: center;
+            line-height: 14px !important;
+
+            &.-withIcon {
+                margin-left: 8px;
+            }
+        }
+
+        &:first-of-type {
+            margin-left: 5px;
+        }
+
+        &-submenu {
+            position: absolute;
+            top: 35px;
+            left: 5px;
+            background-color: $color-background;
+            border: 1px solid $color-divider;
+            padding: 3px 0;
+            border-radius: $border-radius-small;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+
+            &__option {
+                padding: 5px 10px;
+                text-align: right;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $color-divider;
+                }
+            }
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+
+        &:first-of-type {
+            .tabs__item {
+                margin-left: 0;
+            }
+        }
+    }
+
+    &.-isMainTabs {
+        border-bottom: unset;
+
+        .tabs__item {
+            background-color: $color-brand-orange;
+    
+            &.active {
+                background-color: $color-background;
+            }
+    
+            &:hover:not(.active) {
+                background-color: lighten($color-brand-orange, 10%);
+            }
+
+            &-label {
+                color: $color-brand-dark;
+            }
+
+            &:first-of-type {
+                margin-left: 5px;
+            }
+        }
+    }
+
+}

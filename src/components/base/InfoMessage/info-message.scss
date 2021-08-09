@@ -1,0 +1,17 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.info-message {
+    text-align: center;
+    padding: $spacing;
+
+    &__text {
+        margin: 2.5rem 0;
+        word-wrap: break-word;
+    }
+
+    .button {
+        min-width: 75px;
+    }
+}

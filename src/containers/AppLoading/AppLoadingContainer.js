@@ -25,6 +25,7 @@ export default function AppLoadingContainer({
     const dispatch = useDispatch();
     const location = useLocation();
     const history = useHistory();
+    const { pathname } = location;
 
     const { isAuthed } = useSelector(({ authentication }) => authentication);
 
@@ -40,6 +41,12 @@ export default function AppLoadingContainer({
             history.replace('/login');
         }
     }, [isAuthed]);
+
+    useEffect(() => {
+        if (pathname === '/') {
+            history.replace('/login');
+        }
+    }, [pathname]);
 
     const checkAuth = async () => {
         try {

@@ -58,19 +58,28 @@
             font-size: 12px;
             line-height: 15px;
         }
+
+        &-11 {
+            font-size: 11px;
+            line-height: 15px;
+        }
     }
 
     &.color {
-        &-1 {
-            color: $color-brand-1;
+        &-blue {
+            color: $color-brand-blue;
         }
 
-        &-2 {
-            color: $color-brand-2;
+        &-dark {
+            color: $color-brand-dark;
         }
 
-        &-3 {
-            color: $color-brand-3;
+        &-light {
+            color: $color-brand-light;
+        }
+
+        &-danger {
+            color: $color-danger;
         }
     }
 
@@ -98,5 +107,9 @@
         // &-black {
         //     font-weight: 900;
         // }
+    }
+
+    &.underlined {
+        text-decoration: underline;
     }
 }

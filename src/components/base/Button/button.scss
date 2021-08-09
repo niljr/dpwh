@@ -1,4 +1,6 @@
 .button {
+    position: relative;
+
     &.btn-outline-primary,
     &.btn-outline-secondary,
     &.btn-outline-success,
@@ -8,5 +10,19 @@
     &.btn-outline-light,
     &.btn-outline-dark {
         background-color: #fff;
+    }
+
+    &__spinner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 10px;
+        margin: auto;
+        width: 1.2rem !important;
+        height: 1.2rem !important;
+
+        &.text-light {
+            color: #fff !important;
+        }
     }
 }

@@ -2,14 +2,14 @@
 @import '../../../styles/utils/_mixins';
 
 .table {
-    margin-bottom: 0.5rem;
+    padding-bottom: 15px;
 
     tbody {
-        border-bottom: 2px solid $color-brand-5 !important;
+        border-bottom: 2px solid $color-brand-gray !important;
     }
 
     &__header {
-        border-bottom: 2px solid $color-brand-5 !important;
+        border-bottom: 2px solid $color-brand-gray !important;
         border-top: none !important;
         font-size: 12px;
         font-weight: $font-medium;

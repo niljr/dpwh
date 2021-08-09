@@ -1,17 +1,19 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './login.scss';
-import Form from 'react-bootstrap/Form';
-import Button from '../../components/base/Button/Button';
+import Form from '../../components/base/Form/Form';
 import Typography from '../../components/base/Typography/Typography';
 import LOGO from '../../assets/DPWH-logo.png';
+import formStructure from './loginForm';
+import schema from './loginSchema';
 
 type Props = {
     onSubmit: Function,
-    onChange: Function
+    isProcessing: boolean
 }
 
-export default function Login({ onSubmit, onChange }:Props): React$Element<any> {
+export default function Login({ onSubmit, isProcessing }:Props): React$Element<any> {
     return (
         <div className='login'>
             <div className='login__wrapper'>
@@ -24,17 +26,20 @@ export default function Login({ onSubmit, onChange }:Props): React$Element<any> 
                     <img src={LOGO} alt='logo' />
 
                     <Typography
-                        variant='size-26' color='color-2' weight='bold'
+                        variant='size-26' color='color-dark' weight='bold'
                         className='text-center mt-3 mb-5'>
                         DPWH Engineering District
                     </Typography>
-                    <Form onSubmit={onSubmit}>
-                        <input className='form-control mt-4' placeholder='Email' type='email'
-                            required={true} onChange={onChange} name='email'/>
-                        <input className='form-control mt-4' placeholder='Password' type='password'
-                            required={true} onChange={onChange} name='password'/>
-                        <Button label='Login' type='submit' className='mt-4 px-4 w-100 d-block' />
-                    </Form>
+
+                    <Form
+                        isShowLabels={false}
+                        structure={formStructure}
+                        onSubmitForm={onSubmit}
+                        schema={schema}
+                        submitLabel='Login'
+                        isProcessing={isProcessing} />
+
+                    <Link to='/create-account'>Create an Account</Link>
                 </div>
             </div>
         </div>

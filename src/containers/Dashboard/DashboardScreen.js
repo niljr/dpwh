@@ -22,7 +22,7 @@ type Props = {
 function DashboardScreen({ tableHeader, assignments, filters, handleSelectedFilter, selectedFilter, handleSearch, data }: Props): React$Element<any> {
     return (
         <div className='dashboard__wrapper'>
-            <div className='mx-md-5 px-md-5 mx-sm-3 px-sm-0'>
+            <div className='mx-md-5 px-md-5 mx-sm-3 px-sm-0 dashboard__wrapper-step'>
                 <ProgressStep />
             </div>
 
@@ -39,13 +39,13 @@ function DashboardScreen({ tableHeader, assignments, filters, handleSelectedFilt
                                 variant={filter.buttonVariant}
                                 onClick={() => handleSelectedFilter(filter.label)}>
                                 <div className='flex-spaced'>
-                                    <Typography variant={filter.label === 'all' ? 'size-34' : 'size-14'} color='color-3'>{filter.label.toUpperCase()}</Typography>
+                                    <Typography variant={filter.label === 'all' ? 'size-34' : 'size-14'} color='color-light'>{filter.label.toUpperCase()}</Typography>
                                     {selectedFilter === filter.label && (
                                         <FaCheckCircle color='#EFEFEF' className='dashboard__filter-item__icon'/>
                                     )}
                                 </div>
                                 {filter.label !== 'all' && (
-                                    <Typography variant='size-24' color='color-3' weight='semi-bold'>
+                                    <Typography variant='size-24' color='color-light' weight='semi-bold'>
                                         {filter.total}
                                     </Typography>
                                 )}

@@ -1,0 +1,45 @@
+
+@import '../../../styles/utils/_variables';
+@import '../../../styles/utils/_mixins';
+
+.contract-information {
+    margin-top: 10px;
+
+    &__header-icon {
+        margin-right: 5px;
+        cursor: pointer;
+
+        &:last-of-type {
+            margin-right: unset;
+        }
+    }
+
+    &__data {
+        margin-bottom: 15px;
+
+        &-item {
+            border-bottom: 1px solid $color-divider;
+            padding: 5px 10px;
+    
+            &.-wrap {
+                display: flex;
+                justify-content: space-between;
+    
+                p:last-child {
+                    font-weight: 600 !important;
+                }
+            }
+        }
+    }
+
+    &__sub {
+        &-header {
+            background-color: $color-brand-darkBlue;
+            padding: 5px 10px;
+        }
+
+        &-data {
+            padding: 5px 10px;
+        }
+    }
+}
