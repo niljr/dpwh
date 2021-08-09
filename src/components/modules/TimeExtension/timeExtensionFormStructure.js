@@ -1,8 +1,9 @@
 const form = [
     [
+        { label: 'Time Extension No.', name: 'timeExtensionNumber', formControl: 'input', isReadOnly: true, portion: 6 },
         {
             label: 'Approval Level',
-            name: 'approval_level',
+            name: 'approvalLevel',
             formControl: 'select',
             portion: 6,
             options: [
@@ -12,10 +13,12 @@ const form = [
                 { label: 'Level 4', value: '4' },
                 { label: 'Level 5', value: '5' }
             ]
-        },
+        }
+    ],
+    [
         {
             label: 'Reason for Time Extension',
-            name: 'reason_for_extension',
+            name: 'reasonForTimeExtension',
             formControl: 'select',
             portion: 6,
             options: [
@@ -37,12 +40,10 @@ const form = [
                 { label: 'Due to Meritorious Cirmcumstances', value: 'Due to Meritorious Cirmcumstances' },
                 { label: 'Due to Non-release or Insufficient release of funds for contracts with MYOA or MYCA only', value: 'Due to Non-release or Insufficient release of funds for contracts with MYOA or MYCA only' }
             ]
-        }
-    ],
-    [
+        },
         {
             label: 'Approved By',
-            name: 'approved_by',
+            name: 'approvedBy',
             formControl: 'select',
             portion: 6,
             options: [
@@ -50,10 +51,10 @@ const form = [
                 { label: 'Two', value: 'Two' },
                 { label: 'Three', value: 'Three' }
             ]
-        },
-        { label: 'Duration (CDs)', name: 'duration', portion: 6, isReadOnly: true, inputType: 'number' }
+        }
     ],
     [
+        { label: 'Duration (CDs)', name: 'duration', portion: 6, isReadOnly: true, inputType: 'number' },
         {
             label: 'Designation',
             name: 'designation',
@@ -64,25 +65,27 @@ const form = [
                 { label: 'Two', value: 'Two' },
                 { label: 'Three', value: 'Three' }
             ]
-        },
-        { label: 'Additonal Duration (CDs)', name: 'additional_duration', portion: 6, inputType: 'number' }
+        }
     ],
     [
-        { label: 'Date Approved', name: 'date_approved', portion: 6, isReadOnly: true },
+        { label: 'Additonal Duration (CDs)', name: 'additionalDuration', portion: 6, inputType: 'number' },
+        { label: 'Date Approved', name: 'dateApproved', portion: 6, formControl: 'datePicker', isReadOnly: true }
+    ],
+    [
         {
             label: 'Status',
             name: 'status',
             formControl: 'select',
             portion: 6,
             options: [
-                { label: 'One', value: 'One' },
-                { label: 'Two', value: 'Two' },
-                { label: 'Three', value: 'Three' }
+                { value: 'For Approval', label: 'For Approval' },
+                { value: 'Approved', label: 'Approved' },
+                { value: 'Disapproved', label: 'Disapproved' }
             ]
         }
     ],
     [
-        { label: 'In lieu of Suspension Order', name: 'with_suspension_order', formControl: 'checkbox', portion: 6 }
+        { label: 'In lieu of Suspension Order', name: 'withSuspensionOrder', formControl: 'checkbox', portion: 6 }
     ]
 ];
 

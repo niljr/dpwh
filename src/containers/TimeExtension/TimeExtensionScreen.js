@@ -9,7 +9,7 @@ import './time-extension.scss';
 
 type Props = {
     data: Array<any>,
-    handleToggleForm: (actionType: 'edit' | 'add', data: null | Object) => void
+    handleToggleForm: () => void
 }
 
 function TimeExtensionScreen({ data, handleToggleForm }: Props): React$Element<any> {
@@ -30,15 +30,23 @@ function TimeExtensionScreen({ data, handleToggleForm }: Props): React$Element<a
                         label='Add Time Extension'
                         className='ml-2'
                         icon={FaPlus}
-                        onClick={() => handleToggleForm('add')}
+                        onClick={() => handleToggleForm()}
                         size='sm' />
                 </div>}/>
 
             <div className='time-extension__content'>
                 <TableDetails
                     headers={[
-                        'suspensionOrderNo', 'extent', 'description', 'approvalLevel', 'approvedBy', 'designation',
-                        'reason', 'effectivityDate', 'dateApproved', 'cumulativeCD', 'status', 'continuance', 'resumption', 'edit']}
+                        { key: 'timeExtensionNumber', label: 'Time Extension No.' },
+                        { key: 'approvalLevel', label: 'Approval Level' },
+                        { key: 'approvedBy', label: 'Approved By' },
+                        { key: 'designation', label: 'Designation' },
+                        { key: 'dateApproved', label: 'Date Approved' },
+                        { key: 'additionalDuration', label: 'Additional Duration (CDs)' },
+                        { key: 'reasonForTimeExtension', label: 'Reason' },
+                        { key: 'duration', label: 'Duration (CDs)' },
+                        { key: 'status', label: 'Status' },
+                        { key: 'edit', label: 'Edit' }]}
                     list={data}
                     className='pb-3'/>
             </div>

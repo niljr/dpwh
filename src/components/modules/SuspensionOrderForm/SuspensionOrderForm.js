@@ -58,7 +58,7 @@ export default function SuspensionOrderForm({ className = '', suspension = {}, c
         } catch (error) {
             setIsProcessing(false);
             dispatch(setFlashNotification({
-                message: `Failed to ${suspension ? 'update' : 'add'} revision`,
+                message: `Failed to ${suspension ? 'update' : 'add'} suspension order`,
                 isError: true
             }));
         }
