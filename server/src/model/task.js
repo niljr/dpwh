@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const TaskSchema = new mongoose.Schema({
     projectEngineerId: { type: String, required: true },
-    contractId: String,
+    contractId: { type: String },
     componentId: { type: String, required: true },
     contractName: { type: String, required: true, trim: true },
     contractorName: { type: String, required: true, trim: true },
@@ -13,13 +13,19 @@ const TaskSchema = new mongoose.Schema({
     duration: { type: Number, required: true },
     cost: { type: Number, required: true, trim: true },
     accomplishment: { type: Number, required: true, default: 0 },
-    status: { type: String, enum: ['NYS', 'ONGOING', 'COMPLETED', 'ACCEPTED', 'TERMINATED'], default: 'ONGOING', required: true }
-}, { collection: 'Tasks' });
-
-TaskSchema.pre('save', function(next) {
-    this.contractId = 'something-etc-etc';
-    next();
-})
+    status: { 
+        type: String, 
+        enum: ['NYS', 'ONGOING', 'COMPLETED', 'ACCEPTED', 'TERMINATED'], 
+        default: 'ONGOING', 
+        required: true 
+    },
+    revisions: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'Revision' }
+    ],
+    timeExtensions: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'TimeExtension' }
+    ]
+}, { collection: 'tasks', timestamps: true });
 
 const model = mongoose.model('TaskSchema', TaskSchema);
 

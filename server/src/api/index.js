@@ -5,7 +5,9 @@ const express = require('express');
 const users = require('./users');
 const authenticate = require('./auth');
 const tasks = require('./tasks');
-
+const revisions = require('./revisions');
+const suspensions = require('./suspensions');
+const timeExtensions = require('./timeExtensions');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -18,5 +20,8 @@ router.get('/', (req, res) => {
 router.use('/users', users);
 router.use('/authenticate', authenticate);
 router.use('/tasks', tasks);
+router.use('/revisions', revisions);
+router.use('/suspensions', suspensions);
+router.use('/timeExtensions', timeExtensions);
 
 module.exports = router;

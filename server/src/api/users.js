@@ -38,6 +38,8 @@ router.get('/:id', async (req, res, next) => {
             _id: id
         });
 
+        console.log(item)
+
         if (!item) return next();
 
         return res.json(item);
