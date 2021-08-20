@@ -8,6 +8,7 @@ const tasks = require('./tasks');
 const revisions = require('./revisions');
 const suspensions = require('./suspensions');
 const timeExtensions = require('./timeExtensions');
+const notifications = require('./notifications');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -23,5 +24,6 @@ router.use('/tasks', tasks);
 router.use('/revisions', revisions);
 router.use('/suspensions', suspensions);
 router.use('/timeExtensions', timeExtensions);
+router.use('/notifications', notifications);
 
 module.exports = router;

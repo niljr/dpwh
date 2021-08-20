@@ -2,9 +2,13 @@ const express = require('express');
 const webPush = require('web-push');
 const jwt = require('jsonwebtoken');
 const Task = require('../model/task');
+const Notification = require('../model/notification');
+const User = require('../model/user');
 const { getYear, zeroPad } = require('../helpers');
 
 const router = express.Router();
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 
 // Read ALL
 router.get('/', async (req, res, next) => {
@@ -57,24 +61,44 @@ router.post('/', async (req, res, next) => {
             contractId: `${getYear()}CH${zeroPad(count + 1)}`,
         });
 
-        const subscription = {
-            endpoint: 'https://fcm.googleapis.com/fcm/send/dx3sk7rHbFE:APA91bG6nQvjLJNIQigIX7yEH5R0yocDzpwaIhgSxPQcPCHoOCTv6ykaDwXNjjnWSdRPP92bDXEXkKOsYknzy675fw2SAAtqbZfuiWAtF1SG6EqKHfRO1GzqZmAwBi2XuPURlCQOoA0i',
+
+
+
+
+        // NOTIFICATION
+
+        const subscription ={
+            endpoint: 'https://fcm.googleapis.com/fcm/send/AAAAofYPB5Q:APA91bFPFURmMc0XVLFcCEHWMiHjGVguSxaRZpy1XfuZ7cq4nZHIjbdcv5pG3DgrTYtJKN_3kOvyx0cnNqWX919bRYhHwLffIqCd10Zi57dqj-zFsa0UCe98aK14Vh9flaKSKRSNbnMv',
             expirationTime: null,
             keys: {
               p256dh: 'BBaeWcuRxY_Ukiwmg9Ow8TB4ykoZd9G39IgxlocqgFR-cA3HQ3lZaWJ6KNBiGDqr1WeX8JJuoDkgtrtraX7Im_0',
               auth: 'b_L8R-5kFhUIM6M0DR8wgQ'
             }
-        }
+          }
+
 
         const payload = JSON.stringify({
             title: 'Contract ID Added',
             contractId: `${getYear()}CH${zeroPad(count + 1)}`,
-          });
-        
-          webPush.sendNotification(subscription, payload)
-            .catch(error => console.error(error));
+        });
 
+        const item = await User.findOne({ _id: inserted.projectEngineerId });
+
+        console.log(item)
+        console.log(inserted.projectEngineerId)
+
+        webPush.setVapidDetails(
+            'mailto:web-push-book@gauntface.com',
+            publicVapidKey,
+            privateVapidKey
+          );
+
+        if(item) {
+            webPush.sendNotification(subscription, payload)
+            .catch(error => console.error(error));
+        }
         res.json(inserted);
+        
     } catch (error) {
         next(error);
     }
@@ -137,11 +161,6 @@ router.get('/:id/revisions', async (req, res, next) => {
 
 
 
-// // check if user is logged in
-// function isLoggedIn(req, res, next) {
-//     if(req.isAuthenticated()) 
-//         return next();
-//     res.redirect('/')
-// }
+
 
 module.exports = router;

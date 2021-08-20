@@ -18,4 +18,4 @@ export const getAllEngineers = async () => {
 
 export const getUser = async (id: string) => {
     return await makeApiRequest(`${USER_ENDPOINT}${id}`);
-}
+};

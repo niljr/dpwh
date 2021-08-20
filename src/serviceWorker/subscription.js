@@ -18,7 +18,7 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function sendSubscription(subscription) {
-    return fetch('http://192.168.1.2:4343/subscribe', {
+    return fetch('http://192.168.1.8:4343/subscribe', {
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: {

@@ -24,7 +24,13 @@ const TaskSchema = new mongoose.Schema({
     ],
     timeExtensions: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'TimeExtension' }
-    ]
+    ],
+    suspensions: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'Suspension' }
+    ],
+    // notifications: [
+    //     { type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }
+    // ]
 }, { collection: 'tasks', timestamps: true });
 
 const model = mongoose.model('TaskSchema', TaskSchema);

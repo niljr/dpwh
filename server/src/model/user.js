@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
     position: { type: String, required: true },
     role: { type: String, required: true }, 
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    device: { type: Object },
 }, { collection: 'users' });
 
 const model = mongoose.model('UserSchema', UserSchema);

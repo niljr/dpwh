@@ -1,13 +1,19 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const Suspension = require('../model/suspension');
-
+const Task = require('../model/task');
 const router = express.Router();
 
 // ADD
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
     try {
+        const { id } = req.params;
         const inserted = await Suspension.create(req.body);
+       
+          // Add revision id to Task
+          await Task.update({
+            _id: id
+        }, { $push: {suspensions:  inserted._id, }});
 
         res.json(inserted);
     } catch (error) {
@@ -33,8 +39,10 @@ router.get('/:id', async (req, res, next) => {
             _id: id
         });
 
-
         if (!item) return next();
+
+        
+
 
         return res.json(item);
     } catch (error) {

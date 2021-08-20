@@ -1,13 +1,21 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const Revision = require('../model/revision');
-
+const Task = require('../model/task');
 const router = express.Router();
 
 // ADD
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
     try {
-        const inserted = await Revision.create(req.body);
+        const { id } = req.params;
+        const inserted = await Revision.create({
+            ...req.body,
+            taskId: id
+        });
+        
+        await Task.update({
+            _id: id
+        }, { $push: {revisions:  inserted._id, }});
 
         res.json(inserted);
     } catch (error) {

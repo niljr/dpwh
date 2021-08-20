@@ -1,13 +1,19 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const Task = require('../model/task');
 const TimeExtension = require('../model/timeExtension');
 
 const router = express.Router();
 
 // ADD
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
     try {
+        const { id } = req.params;
         const inserted = await TimeExtension.create(req.body);
+
+        await Task.update({
+            _id: id
+        }, { $push: {suspensions:  inserted._id, }});
 
         res.json(inserted);
     } catch (error) {
